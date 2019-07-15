@@ -21,7 +21,14 @@ Rails.application.routes.draw do
 
   resources :orders, only: [:new, :create, :show]
 
+  resources :users, only: [:create, :new]
+
   get '/register', to: 'users#register'
+
+  post '/profile', to: 'users#create'
+
+  get '/profile', to: 'users#show'
+
 
   get '/login', to: 'sessions#new'
 end
