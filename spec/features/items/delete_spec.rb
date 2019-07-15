@@ -10,6 +10,9 @@ RSpec.describe 'Delete Item' do
         @giant = @megan.items.create!(name: 'Giant', description: "I'm a Giant!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
         @hippo = @brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
         @giant.reviews.create!(title: 'Great', description: 'Super duper', rating: 5)
+
+        @user_1 = User.create!(email: "123@gmail.com", password_digest: "password", address: "456 Main St.", city: "Denver", state: "CO", zip: 80220, role: 1)
+
       end
 
       it 'I can click a link to delete that item' do
@@ -34,7 +37,7 @@ RSpec.describe 'Delete Item' do
 
       describe 'If an item has orders' do
         it 'I can not see a delete button for items with orders' do
-          order_1 = Order.create!(name: 'Megan M', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
+          order_1 = @user_1.orders.create!(name: 'Megan M', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
           order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2)
 
           visit "/items/#{@ogre.id}"
@@ -43,7 +46,7 @@ RSpec.describe 'Delete Item' do
         end
 
         it 'I can not delete an item with orders through a direct request' do
-          order_1 = Order.create!(name: 'Megan M', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
+          order_1 = @user_1.orders.create!(name: 'Megan M', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
           order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2)
 
           page.driver.submit :delete, item_path(@ogre), {}
