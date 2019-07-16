@@ -19,8 +19,15 @@ RSpec.describe "User Registration" do
 
       expect(page).to have_content("Thanks for Registering")
       expect(page).to have_content("You are now Logged in McLovin'")
+    end
 
+    it "I must fill in all fields" do
+      visit register_path
 
+      click_on "Create Account"
+      expect(current_path).to eq(profile_path)
+
+      expect(page).to have_content("Name can't be blank")
     end
   end
 end
