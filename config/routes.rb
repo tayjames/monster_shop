@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
   post '/profile', to: 'users#create'
 
-  get '/profile', to: 'users#show'
+  get '/profile/:id', to: 'users#show', as: 'user_profile'
 
 
   get '/login', to: 'sessions#new'
