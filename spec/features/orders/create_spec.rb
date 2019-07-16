@@ -47,7 +47,7 @@ RSpec.describe 'Create Order' do
 
     it 'I can create an order from the new order page' do
       skip
-      @user_1 = User.create!(email: "123@gmail.com", password_digest: "password", address: "456 Main St.", city: "Denver", state: "CO", zip: 80220, role: 1)
+      @user_1 = User.create!(email: "123@gmail.com", password: "password", address: "456 Main St.", city: "Denver", state: "CO", zip: 80220, role: 1)
 
       visit item_path(@ogre)
       click_button 'Add to Cart'
@@ -70,7 +70,7 @@ RSpec.describe 'Create Order' do
       fill_in 'State', with: state
       fill_in 'Zip', with: zip
       click_button 'Create Order'
-      
+
       new_order = Order.last
 
       expect(current_path).to eq(order_path(new_order))
