@@ -59,6 +59,16 @@ RSpec.describe 'Item Index Page' do
 
       expect(page).to_not have_content(@ogre_2.name)
       expect(page).to_not have_content(@hippo_2.name)
+
+      visit merchant_items_path(@megan)
+
+      expect(page).to have_content(@ogre.name)
+      expect(page).to_not have_content(@ogre_2.name)
+
+      visit merchant_items_path(@brian)
+
+      expect(page).to have_content(@hippo.name)
+      expect(page).to_not have_content(@hippo_2.name)
     end
 
 # I see all items in the system except disabled items
