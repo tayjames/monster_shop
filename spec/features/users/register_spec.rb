@@ -28,6 +28,12 @@ RSpec.describe "User Registration" do
       expect(current_path).to eq(profile_path)
 
       expect(page).to have_content("Name can't be blank")
+      expect(page).to have_content("Address can't be blank")
+      expect(page).to have_content("City can't be blank")
+      expect(page).to have_content("State can't be blank")
+      expect(page).to have_content("Zip is not a number")
+      expect(page).to have_content("Email can't be blank")
+      expect(page).to have_content("Password can't be blank")
     end
 
     it "I cannot use an email already in the system" do
