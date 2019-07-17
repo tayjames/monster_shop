@@ -26,6 +26,8 @@ RSpec.describe Item do
       @review_3 = @ogre.reviews.create(title: 'EW', description: 'This Ogre is Ew', rating: 1)
       @review_4 = @ogre.reviews.create(title: 'So So', description: 'This Ogre is So so', rating: 2)
       @review_5 = @ogre.reviews.create(title: 'Okay', description: 'This Ogre is Okay', rating: 4)
+      @ogre_2 = @megan.items.create!(name: 'Ogre', description: "I'm an Ogre!", price: 20, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: false, inventory: 5 )
+      @giant_2 = @megan.items.create!(name: 'Giant', description: "I'm a Giant!", price: 20, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: false, inventory: 5 )
     end
 
     it '.sorted_reviews()' do
@@ -37,5 +39,11 @@ RSpec.describe Item do
     it '.average_rating' do
       expect(@ogre.average_rating.round(2)).to eq(3.00)
     end
+
+  describe 'Class Methods' do
+    it '#enabled_items' do
+      expect(Item.enabled_items).to_not eq([@ogre_2, @giant_2])
+    end
   end
+end
 end

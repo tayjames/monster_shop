@@ -27,8 +27,11 @@ Rails.application.routes.draw do
 
   post '/profile', to: 'users#create'
 
-  get '/profile', to: 'users#show'
-
+  get '/profile/:id', to: 'users#show', as: 'user_profile'
+  get '/profile/:id/edit', to: 'users#edit', as: 'edit_user_profile'
+  patch 'profile/:id', to: 'users#update'
 
   get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  delete '/login', to: 'sessions#destroy', as: 'logout'
 end
