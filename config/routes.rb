@@ -31,14 +31,14 @@ Rails.application.routes.draw do
   patch 'profile/:id', to: 'users#update'
 
   get '/login', to: 'sessions#new'
-  post '/login', to: 'sessions#create'
+  post '/login', to: 'sessions#create', as: 'user_login'
   get '/logout', to: 'sessions#destroy'
 
-  namespace :merchants do
-    get '/', to: 'dashboard#index', as: :dashboard
+  namespace :merchant do
+    get '/', to: 'dashboard#index', as: 'dashboard'
   end
 
   namespace :admin do
-    get '/', to: 'dashboard#index', as: :dashboard
+    get '/dashboard', to: 'dashboard#index', as: :dashboard
   end
 end
