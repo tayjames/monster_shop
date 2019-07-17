@@ -46,5 +46,43 @@ RSpec.describe 'Item Index Page' do
         expect(page).to have_link(@brian.name)
       end
     end
+
+    it "I can see only enabled items and image is a link to item's page" do
+      @ogre_2 = @megan.items.create!(name: 'Ogre the Voyager', description: "I'm an Ogre!", price: 20, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: false, inventory: 5 )
+      @hippo_2 = @brian.items.create!(name: 'Pippo the Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: false, inventory: 3 )
+
+      visit items_path
+
+      expect(page).to have_content(@ogre.name)
+      expect(page).to have_content(@giant.name)
+      expect(page).to have_content(@hippo.name)
+
+      expect(page).to_not have_content(@ogre_2.name)
+      expect(page).to_not have_content(@hippo_2.name)
+
+      visit merchant_items_path(@megan)
+
+      expect(page).to have_content(@ogre.name)
+      expect(page).to_not have_content(@ogre_2.name)
+
+      visit merchant_items_path(@brian)
+
+      expect(page).to have_content(@hippo.name)
+      expect(page).to_not have_content(@hippo_2.name)
+
+      visit items_path
+
+      within "#item-#{@ogre.id}" do
+        find("img[src*='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw']").click
+      end
+
+      expect(page).to have_content(@ogre.description)
+
+      within "#item-#{@giant.id}" do
+        find("img[src*='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw']").click
+      end
+
+      expect(page).to have_content(@giant.description)
+    end
   end
 end

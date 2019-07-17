@@ -15,7 +15,7 @@ RSpec.describe "User Registration" do
       fill_in "Confirm Password", with: "password"
       click_on "Create Account"
 
-      expect(current_path).to eq(profile_path(User.last))
+      expect(current_path).to eq(user_profile_path(User.last))
 
       expect(page).to have_content("Thanks for Registering")
       expect(page).to have_content("You are now Logged in McLovin'")
@@ -28,6 +28,12 @@ RSpec.describe "User Registration" do
       expect(current_path).to eq(profile_path)
 
       expect(page).to have_content("Name can't be blank")
+      expect(page).to have_content("Address can't be blank")
+      expect(page).to have_content("City can't be blank")
+      expect(page).to have_content("State can't be blank")
+      expect(page).to have_content("Zip is not a number")
+      expect(page).to have_content("Email can't be blank")
+      expect(page).to have_content("Password can't be blank")
     end
 
     it "I cannot use an email already in the system" do

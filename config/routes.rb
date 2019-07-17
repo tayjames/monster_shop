@@ -22,18 +22,18 @@ Rails.application.routes.draw do
 
   resources :orders, only: [:new, :create, :show]
 
-  resources :users, only: [:create, :new]
+  resources :users, only: [:new]
 
   get '/register', to: 'users#register'
-
   post '/profile', to: 'users#create'
-  get '/profile', to: 'users#show'
+  get '/profile/:id', to: 'users#show', as: 'user_profile'
+  get '/profile/:id/edit', to: 'users#edit', as: 'edit_user_profile'
+  patch 'profile/:id', to: 'users#update'
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
 
-  # get '/merchant', to: 'merchant/dashboard#index', as: :merchant_dashboard
   namespace :merchants do
     get '/', to: 'dashboard#index', as: :dashboard
   end
@@ -41,6 +41,4 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/', to: 'dashboard#index', as: :dashboard
   end
-
-
 end
