@@ -2,25 +2,10 @@ require "rails_helper"
 
 RSpec.describe "User Login" do
   describe "As a visitor" do
-    it "When I visit the login path I see a field to enter my email address and password" do
-      # binding.pry
-      visitor = User.create!(email: "123@gmail.com", password: "password", name: "Tom", role: 0, address: "123 Main St.", city: "Denver", state: "Colorado", zip: 80220)
-      # allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
-      visit login_path
-      fill_in "email", with: "123@gmail.com"
-      fill_in "password", with: "password"
-
-      click_button("Login")
-
-      expect(visitor.role).to eq("visitor")
-      visit profile_path(visitor)
-      expect(page).to have_content("You are now Logged in #{visitor.name}")
-    end
 
     it "When I visit the login path I see a field to enter my email address and password" do
-      # binding.pry
       user = User.create!(email: "123@gmail.com", password: "password", name: "Tom", role: 1, address: "123 Main St.", city: "Denver", state: "Colorado", zip: 80220)
-      # allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
       visit login_path
       fill_in "email", with: "123@gmail.com"
       fill_in "password", with: "password"
@@ -28,7 +13,7 @@ RSpec.describe "User Login" do
       click_button("Login")
 
       expect(user.role).to eq("registered_user")
-      expect(current_path).to eq(profile_path)
+      expect(current_path).to eq(user_profile_path(user))
       expect(page).to have_content("You are now Logged in #{user.name}")
     end
 
