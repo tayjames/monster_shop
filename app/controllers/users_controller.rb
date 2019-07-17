@@ -5,14 +5,15 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(user_params)
+    @user = User.new(user_params)
     # binding.pry
-    if user.save
+    if @user.save
+      session[:user_id] = @user.id
       flash[:notice] = "Thanks for Registering"
-      flash[:message] = "You are now Logged in #{user.name}"
-      redirect_to user_profile_path(user)
+      flash[:message] = "You are now Logged in #{@user.name}"
+      redirect_to user_profile_path(@user)
     else
-      flash[:notice] = user.errors.full_messages.to_sentence
+      flash[:notice] = @user.errors.full_messages.to_sentence
       render :register
     end
   end
