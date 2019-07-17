@@ -1,11 +1,11 @@
 class ItemsController < ApplicationController
   def index
-    binding.pry
+    # binding.pry
     if params[:merchant_id]
       @merchant = Merchant.find(params[:merchant_id])
       @items = @merchant.items
     else
-      @items = Item.all
+      @items = Item.enabled_items
     end
   end
 
