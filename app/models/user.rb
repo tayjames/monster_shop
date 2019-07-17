@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-
+  belongs_to :merchant, optional: true
   has_many :orders
 
   validates :email,

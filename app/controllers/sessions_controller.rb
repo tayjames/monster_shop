@@ -7,11 +7,12 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password]) #if user exists and the pw is authenticated, then store user in session
       session[:user_id] = user.id
 
-      if current_registered_user?
-        redirect_to user_profile_path(user)
+      if current_merchant? && current_registered_user?
+      # binding.pry
+      redirect_to merchant_dashboard_path
 
-      elsif current_merchant?
-        redirect_to merchants_dashboard_path
+      elsif current_registered_user?
+        redirect_to user_profile_path(user)
 
       elsif current_admin?
         redirect_to admin_dashboard_path
@@ -19,8 +20,8 @@ class SessionsController < ApplicationController
 
       flash[:message] = "You are now Logged in #{user.name}"
     else
+      flash[:notice] = "Email/Password incorrect."
       render :new
-      flash[:notice] = user.errors.full_messages.to_sentence
     end
   end
 

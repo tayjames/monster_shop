@@ -18,24 +18,25 @@ RSpec.describe "User Login" do
     end
 
     it "If I am a merchant user, I am redirected to my merchant dashboard page" do
-      merchant = User.create!(email: "123@gmail.com", password: "password", name: "Tom", role: 2, address: "123 Main St.", city: "Denver", state: "Colorado", zip: 80220)
+      megan = Merchant.create!(name: 'Megans Marmalades', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
+      merchant = megan.users.create!(email: "merchant@gmail.com", password: "password", name: "Tom", role: 1, address: "123 Main St.", city: "Denver", state: "Colorado", zip: 80220)
 
       visit login_path
-      fill_in "email", with: "123@gmail.com"
+      fill_in "email", with: "merchant@gmail.com"
       fill_in "password", with: "password"
 
       click_button("Login")
 
-      expect(merchant.role).to eq("merchant")
-      expect(current_path).to eq(merchants_dashboard_path)
+      expect(merchant.role).to eq("registered_user")
+      expect(current_path).to eq(merchant_dashboard_path)
       expect(page).to have_content("You are now Logged in #{merchant.name}")
     end
 
     it "If I am a admin user, I am redirected to my admin dashboard page" do
-      admin = User.create!(email: "123@gmail.com", password: "password", name: "Tom", role: 3, address: "123 Main St.", city: "Denver", state: "Colorado", zip: 80220)
+      admin = User.create!(email: "admin@gmail.com", password: "password", name: "Tom", role: 3, address: "123 Main St.", city: "Denver", state: "Colorado", zip: 80220)
 
       visit login_path
-      fill_in "email", with: "123@gmail.com"
+      fill_in "email", with: "admin@gmail.com"
       fill_in "password", with: "password"
 
       click_button("Login")
