@@ -16,6 +16,7 @@ RSpec.describe 'User Profile Show' do
         expect(page).to have_content("State: CO")
         expect(page).to have_content("ZIP: 80220")
         expect(page).to have_content("E-Mail: 123@gmail.com")
+        expect(page).to have_button("Edit Profile")
       end
     end
   end
