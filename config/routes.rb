@@ -32,4 +32,6 @@ Rails.application.routes.draw do
   patch 'profile/:id', to: 'users#update'
 
   get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  delete '/login', to: 'sessions#destroy', as: 'logout'
 end

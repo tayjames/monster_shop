@@ -6,7 +6,8 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password]) #if user exists and the pw is authenticated, then store user in session
       session[:user_id] = user.id
-      redirect profile_path
+      # binding.pry
+      redirect_to user_profile_path(user)
       flash[:message] = "You are now Logged in #{user.name}"
     else
       render :new
