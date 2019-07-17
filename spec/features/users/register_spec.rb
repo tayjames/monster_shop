@@ -15,7 +15,7 @@ RSpec.describe "User Registration" do
       fill_in "Confirm Password", with: "password"
       click_on "Create Account"
 
-      expect(current_path).to eq(profile_path(User.last))
+      expect(current_path).to eq(user_profile_path(User.last))
 
       expect(page).to have_content("Thanks for Registering")
       expect(page).to have_content("You are now Logged in McLovin'")
