@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root 'welcome#index'
@@ -21,17 +22,23 @@ Rails.application.routes.draw do
 
   resources :orders, only: [:new, :create, :show]
 
-  resources :users, only: [:create, :new]
+  resources :users, only: [:new]
 
   get '/register', to: 'users#register'
-
   post '/profile', to: 'users#create'
-
   get '/profile/:id', to: 'users#show', as: 'user_profile'
   get '/profile/:id/edit', to: 'users#edit', as: 'edit_user_profile'
   patch 'profile/:id', to: 'users#update'
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
-  delete '/login', to: 'sessions#destroy', as: 'logout'
+  get '/logout', to: 'sessions#destroy'
+
+  namespace :merchants do
+    get '/', to: 'dashboard#index', as: :dashboard
+  end
+
+  namespace :admin do
+    get '/', to: 'dashboard#index', as: :dashboard
+  end
 end
