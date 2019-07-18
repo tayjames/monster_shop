@@ -1,4 +1,5 @@
 class CartController < ApplicationController
+
   def add_item
     item = Item.find(params[:item_id])
     session[:cart] ||= {}
@@ -13,6 +14,9 @@ class CartController < ApplicationController
   end
 
   def show
+    if current_merchant? || current_admin?
+      render file:"/public/404"
+    end
   end
 
   def empty
@@ -35,4 +39,7 @@ class CartController < ApplicationController
     session[:cart] = cart.contents
     redirect_to '/cart'
   end
+
+
+
 end
