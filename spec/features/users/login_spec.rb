@@ -13,7 +13,7 @@ RSpec.describe "User Login" do
       click_button("Login")
 
       expect(user.role).to eq("registered_user")
-      expect(current_path).to eq(user_profile_path(user))
+      expect(current_path).to eq(profile_path)
       expect(page).to have_content("You are now Logged in #{user.name}")
     end
 
