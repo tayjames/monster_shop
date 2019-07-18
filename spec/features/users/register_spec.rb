@@ -11,8 +11,8 @@ RSpec.describe "User Registration" do
       fill_in "State", with: "HI"
       fill_in "Zip", with: 96820
       fill_in "Email", with: "fogel@aol.com"
-      fill_in "Password", with: "password"
-      fill_in "Confirm Password", with: "password"
+      fill_in :password, with: "password"
+      fill_in :password_confirmation, with: "password"
       click_on "Create Account"
 
       expect(current_path).to eq(user_profile_path(User.last))

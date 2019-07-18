@@ -28,21 +28,39 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.update(user_params)
-    flash[:notice] = "Your Profile has been updated."
-    redirect_to user_profile_path(@user)
+    if @user.update(user_params)
+      flash[:notice] = "Your Profile has been updated."
+      redirect_to user_profile_path(@user)
+    else
+      flash[:alert] = @user.errors.full_messages.to_sentence
+      render :edit
+    end
   end
 
   def update_password
-    @user.update(user_params)
-    flash[:notice] = "Your password has been updated."
-    redirect_to user_profile_path(@user)
+    if @user.update(user_params)
+      flash[:notice] = "Your password has been updated."
+      redirect_to user_profile_path(@user)
+    else
+      flash[:alert] = @user.errors.full_messages.to_sentence
+      render :edit_password
+    end
   end
 
   private
 
   def user_params
-    params.permit(:name, :address, :city, :state, :zip, :role, :email, :password)
+    params.permit(
+      :name,
+      :address,
+      :city,
+      :state,
+      :zip,
+      :role,
+      :email,
+      :password,
+      :password_confirmation
+    )
   end
 
 
