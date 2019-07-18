@@ -5,6 +5,7 @@ RSpec.describe 'User Update' do
     describe 'when I visit my profile page' do
       before(:each) do
         @user_1 = User.create!(email: "123@gmail.com", password: "password", name: "PapRica Jones", address: "456 Main St.", city: "Denver", state: "CO", zip: 80220, role: 1)
+        @user_2 = User.create!(email: "456@gmail.com", password: "password", name: "PapRica Jones", address: "456 Main St.", city: "Denver", state: "CO", zip: 80220, role: 1)
         visit user_profile_path(@user_1)
       end
 
@@ -84,6 +85,16 @@ RSpec.describe 'User Update' do
 
         expect(current_path).to eq(user_profile_path(@user_1))
         expect(page).to have_content("Password confirmation doesn't match Password")
+      end
+
+      it "I cannot update my email to an existing email" do
+        click_button 'Edit Profile'
+
+        fill_in "Email", with: "456@gmail.com"
+
+        click_button 'Update Profile'
+
+        expect(page).to have_content("Email has already been taken")
       end
     end
   end
