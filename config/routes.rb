@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    get '/users', to: "dashboard#all}", as: 'all_users'
+    get '/users', to: "dashboard#all", as: 'all_users'
     get '/dashboard', to: 'dashboard#index', as: :dashboard
   end
 end
