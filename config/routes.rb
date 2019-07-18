@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new]
 
   get '/register', to: 'users#register'
+  get '/profile', to: 'users#show'
   post '/profile', to: 'users#create'
   get '/profile/:id', to: 'users#show', as: 'user_profile'
   get '/profile/:id/edit', to: 'users#edit', as: 'edit_user_profile'
@@ -39,7 +40,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    get '/users', to: "dashboard#all}", as: 'all_users'
+    get '/users', to: "dashboard#all", as: 'all_users'
     get '/dashboard', to: 'dashboard#index', as: :dashboard
   end
 end

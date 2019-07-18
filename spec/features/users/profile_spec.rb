@@ -8,7 +8,16 @@ RSpec.describe 'User Profile Show' do
       end
 
       it "I see all of my profile data on the page except my password" do
-        visit user_profile_path(@user_1)
+
+
+        visit login_path
+        fill_in "email", with: "123@gmail.com"
+        fill_in "password", with: "password"
+
+        click_button("Login")
+
+        expect(@user_1.role).to eq("registered_user")
+        visit "/profile"
 
         expect(page).to have_content("PapRica Jones")
         expect(page).to have_content("Address: 456 Main St.")

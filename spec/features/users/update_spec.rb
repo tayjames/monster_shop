@@ -8,6 +8,16 @@ RSpec.describe 'User Update' do
       end
 
       it "I can edit my profile" do
+
+        visit login_path
+        fill_in "email", with: "123@gmail.com"
+        fill_in "password", with: "password"
+
+        click_button("Login")
+
+        expect(@user_1.role).to eq("registered_user")
+
+
         visit user_profile_path(@user_1)
         click_button 'Edit Profile'
 
@@ -27,7 +37,7 @@ RSpec.describe 'User Update' do
         fill_in "Zip", with: 96820
         fill_in "Email", with: "fogel@aol.com"
         fill_in "Password", with: "password"
-        
+
         click_on 'Update Profile'
 
         expect(current_path).to eq(user_profile_path(@user_1))
