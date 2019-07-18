@@ -97,6 +97,20 @@ RSpec.describe "User Login" do
           expect(page).to have_content("You are already logged in")
         end
       end
+      
+      describe "When I visit the login page and submit invalid info" do
+        it "I am redirected to the login page and I see a flash message that tells me that my creds were incorrect" do
+          user = User.create!(email: "123@gmail.com", password: "password", name: "Tom", role: 1, address: "123 Main St.", city: "Denver", state: "Colorado", zip: 80220)
+
+          visit login_path
+          fill_in "Email", with: "123@gmail.com"
+          fill_in "Password", with: "passwork"
+          click_button("Login")
+
+          expect(current_path).to eq(login_path)
+          expect(page).to have_content("Email/Password incorrect.")
+        end
+      end
     end
   end
 end
