@@ -76,6 +76,17 @@ RSpec.describe "User Login" do
 
       expect(page).to_not have_link("Login")
       expect(page).to_not have_link("Register")
+
+      visit login_path
+
+      fill_in "email", with: "123@gmail.com"
+      fill_in "password", with: "password"
+
+      click_button("Login")
+
+      expect(current_path).to eq(user_profile_path(user))
+      expect(current_path).to_not eq(merchant_dashboard_path)
+
     end
   end
 end

@@ -9,7 +9,6 @@ class SessionsController < ApplicationController
       if current_merchant? && current_registered_user?
         redirect_to merchant_dashboard_path
       elsif current_registered_user?
-        binding.pry
         redirect_to user_profile_path(user)
       elsif current_admin?
         redirect_to admin_dashboard_path
