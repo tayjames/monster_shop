@@ -1,11 +1,15 @@
 class SessionsController < ApplicationController
   def new
+    # binding.pry
     if current_user
-      if current_registered_user?
-        redirect_to (user_profile_path(current_user))
-        flash[:success] = "You are already logged in"
-      elsif current_merchant?
+      if current_merchant_admin?
         redirect_to (merchant_dashboard_path)
+        flash[:success] = "You are already logged in"
+      elsif current_merchant_user?
+        redirect_to (merchant_dashboard_path)
+        flash[:success] = "You are already logged in"
+      elsif current_registered_user?
+        redirect_to (user_profile_path(current_user))
         flash[:success] = "You are already logged in"
       else current_admin?
         redirect_to (admin_dashboard_path)
@@ -18,8 +22,7 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password]) #if user exists and the pw is authenticated, then store user in session
       session[:user_id] = user.id
-
-      if current_merchant? && current_registered_user?
+      if current_merchant_user?
       redirect_to merchant_dashboard_path
 
       elsif current_registered_user?
