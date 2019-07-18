@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :get_user, only: [:show, :edit, :update]
+  before_action :get_user, only: [:show, :edit, :update, :edit_password, :update_password]
   def register
 
   end
@@ -24,9 +24,18 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def edit_password
+  end
+
   def update
     @user.update(user_params)
     flash[:notice] = "Your Profile has been updated."
+    redirect_to user_profile_path(@user)
+  end
+
+  def update_password
+    @user.update(user_params)
+    flash[:notice] = "Your password has been updated."
     redirect_to user_profile_path(@user)
   end
 
@@ -41,4 +50,3 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 end
-

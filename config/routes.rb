@@ -28,7 +28,9 @@ Rails.application.routes.draw do
   post '/profile', to: 'users#create'
   get '/profile/:id', to: 'users#show', as: 'user_profile'
   get '/profile/:id/edit', to: 'users#edit', as: 'edit_user_profile'
-  patch 'profile/:id', to: 'users#update'
+  get '/profile/:id/edit_password', to: 'users#edit_password', as: 'edit_password'
+  put 'profile/:id', to: 'users#update'
+  patch 'profile/:id', to: 'users#update_password', as: 'update_password'
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create', as: 'user_login'

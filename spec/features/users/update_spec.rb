@@ -5,10 +5,10 @@ RSpec.describe 'User Update' do
     describe 'when I visit my profile page' do
       before(:each) do
         @user_1 = User.create!(email: "123@gmail.com", password: "password", name: "PapRica Jones", address: "456 Main St.", city: "Denver", state: "CO", zip: 80220, role: 1)
+        visit user_profile_path(@user_1)
       end
 
       it "I can edit my profile" do
-        visit user_profile_path(@user_1)
         click_button 'Edit Profile'
 
         expect(current_path).to eq(edit_user_profile_path(@user_1))
@@ -27,7 +27,7 @@ RSpec.describe 'User Update' do
         fill_in "Zip", with: 96820
         fill_in "Email", with: "fogel@aol.com"
         fill_in "Password", with: "password"
-        
+
         click_on 'Update Profile'
 
         expect(current_path).to eq(user_profile_path(@user_1))
@@ -39,6 +39,23 @@ RSpec.describe 'User Update' do
         expect(page).to have_content("HI")
         expect(page).to have_content(96820)
         expect(page).to have_content("fogel@aol.com")
+      end
+
+      it "I can edit my password" do
+        click_button 'Edit Password'
+
+        expect(current_path).to eq(edit_password_path(@user_1))
+        # save_and_open_page
+        expect(page).to have_field("New Password")
+        expect(page).to have_field("Confirm New Password")
+
+        fill_in 'New Password', with: "newpassword"
+        fill_in 'Confirm New Password', with: "newpassword"
+
+        click_button 'Update Password'
+
+        expect(current_path).to eq(user_profile_path(@user_1))
+        expect(page).to have_content("Your password has been updated")
       end
     end
   end

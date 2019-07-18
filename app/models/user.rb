@@ -8,6 +8,7 @@ class User < ApplicationRecord
             :address,
             :city,
             :state, presence: { message: "can't be blank"}
+  validates_confirmation_of :password
   validates_uniqueness_of :email
   validates_presence_of :role
   validates :zip, numericality: { message: "is not a number"}
