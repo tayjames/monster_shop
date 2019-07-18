@@ -72,6 +72,20 @@ RSpec.describe "User Login" do
 
         it "If I am merchant user, I am redirected to my merchant dashboard page" do
           megan = Merchant.create!(name: 'Megans Marmalades', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
+          merchant = megan.users.create!(email: "merchant@gmail.com", password: "password", name: "Tom", role: 1, address: "123 Main St.", city: "Denver", state: "Colorado", zip: 80220)
+          visit login_path
+
+          fill_in "email", with: "merchant@gmail.com"
+          fill_in "password", with: "password"
+          click_button("Login")
+
+          visit login_path
+          expect(current_path).to eq(merchant_dashboard_path)
+          expect(page).to have_content("You are already logged in")
+        end
+
+        it "If I am merchant admin user, I am redirected to my merchant dashboard page" do
+          megan = Merchant.create!(name: 'Megans Marmalades', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
           merchant = megan.users.create!(email: "merchant@gmail.com", password: "password", name: "Tom", role: 2, address: "123 Main St.", city: "Denver", state: "Colorado", zip: 80220)
           visit login_path
 
@@ -83,6 +97,7 @@ RSpec.describe "User Login" do
           expect(current_path).to eq(merchant_dashboard_path)
           expect(page).to have_content("You are already logged in")
         end
+#
 
         it "If I am a admin user, I am redirected to my admin dashboard page" do
           admin = User.create!(email: "admin@gmail.com", password: "password", name: "Tom", role: 3, address: "123 Main St.", city: "Denver", state: "Colorado", zip: 80220)
@@ -97,7 +112,7 @@ RSpec.describe "User Login" do
           expect(page).to have_content("You are already logged in")
         end
       end
-      
+
       describe "When I visit the login page and submit invalid info" do
         it "I am redirected to the login page and I see a flash message that tells me that my creds were incorrect" do
           user = User.create!(email: "123@gmail.com", password: "password", name: "Tom", role: 1, address: "123 Main St.", city: "Denver", state: "Colorado", zip: 80220)
