@@ -6,7 +6,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    # binding.pry
     if @user.save
       session[:user_id] = @user.id
       flash[:notice] = "Thanks for Registering"
@@ -36,9 +35,7 @@ class UsersController < ApplicationController
     params.permit(:name, :address, :city, :state, :zip, :role, :email, :password)
   end
 
-
   def get_user
     @user = User.find(params[:id])
   end
 end
-
