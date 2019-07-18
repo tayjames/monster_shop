@@ -13,5 +13,5 @@ class User < ApplicationRecord
   validates :zip, numericality: { message: "is not a number"}
 
   has_secure_password
-  enum role: ["visitor", "registered_user", "merchant", "admin"]
+  enum role: ["visitor", "registered_user", "merchant_admin", "admin"]
 end
