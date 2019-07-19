@@ -8,7 +8,8 @@ class Order < ApplicationRecord
                         :address,
                         :city,
                         :state,
-                        :zip
+                        :zip,
+                        :status
 
   def grand_total
     order_items.sum('price * quantity')
