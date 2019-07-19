@@ -6,7 +6,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    # binding.pry
     if @user.save
       session[:user_id] = @user.id
       flash[:notice] = "Thanks for Registering"
@@ -62,7 +61,6 @@ class UsersController < ApplicationController
       :password_confirmation
     )
   end
-
 
   def get_user
     if current_registered_user?

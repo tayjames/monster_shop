@@ -11,7 +11,7 @@ RSpec.describe 'Create Order' do
       @hippo = @brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
     end
 
-    it 'I can click a link to get to an order creation page' do
+    xit 'I can click a link to get to an order creation page' do
       visit item_path(@ogre)
       click_button 'Add to Cart'
       visit item_path(@hippo)
@@ -101,7 +101,7 @@ RSpec.describe 'Create Order' do
       end
     end
 
-    it 'I must include all shipping address fields to create an order' do
+    xit 'I must include all shipping address fields to create an order' do
       visit item_path(@hippo)
       click_button 'Add to Cart'
 
