@@ -164,9 +164,11 @@ RSpec.describe "User Login" do
       expect(page).to_not have_link("Login")
       expect(page).to_not have_link("Register")
 
+      click_on("Logout")
+
       visit login_path
 
-      fill_in "email", with: "123@gmail.com"
+      fill_in "Email", with: "123@gmail.com"
       fill_in "password", with: "password"
 
       click_button("Login")
@@ -177,4 +179,5 @@ RSpec.describe "User Login" do
 
     end
   end
+end
 end
