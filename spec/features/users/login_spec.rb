@@ -125,6 +125,21 @@ RSpec.describe "User Login" do
           expect(current_path).to eq(login_path)
           expect(page).to have_content("Email/Password incorrect.")
         end
+
+      describe "When I have items in my cart and visit my cart" do
+        it "I see info telling me I must register or login to finish the checkout process" do
+          megan = Merchant.create!(name: 'Megans Marmalades', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
+          ogre = megan.items.create!(name: 'Ogre', description: "I'm an Ogre!", price: 20, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 5 )
+
+          visit "/items/#{ogre.id}"
+          click_on("Add to Cart")
+
+          visit cart_path
+
+            expect(page).to have_content("Must register or login.")
+            expect(current_path).to eq(cart_path)
+          end
+        end
       end
     end
   end
