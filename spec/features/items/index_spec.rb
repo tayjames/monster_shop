@@ -119,7 +119,3 @@ RSpec.describe 'Item Index Page' do
     end
   end
 end
-# - the top 5 most popular items by quantity purchased, plus the quantity bought
-# - the bottom 5 least popular items, plus the quantity bought
-#
-# "Popularity" is determined by total quantity of that item ordered
