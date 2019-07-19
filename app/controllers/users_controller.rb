@@ -18,6 +18,9 @@ class UsersController < ApplicationController
   end
 
   def show
+    if current_merchant? || current_admin?
+      render file: "/public/404"
+    end
   end
 
   def edit
@@ -65,7 +68,7 @@ class UsersController < ApplicationController
   def get_user
     if current_registered_user?
       @user = User.find(session[:user_id])
-    else
+    elsif
       render file: "/public/404"
     end
   end
