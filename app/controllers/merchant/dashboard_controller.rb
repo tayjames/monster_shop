@@ -9,6 +9,6 @@ class Merchant::DashboardController < ApplicationController
 
 private
   def require_merchant
-    render file: "/public/404" unless current_merchant?
+    render file: "/public/404" unless current_merchant_user?
   end
 end
