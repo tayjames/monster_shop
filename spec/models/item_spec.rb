@@ -62,7 +62,7 @@ RSpec.describe Item do
       @order_3.order_items.create!(item: @ogre_2, price: @ogre_2.price, quantity: 5)
       @order_3.order_items.create!(item: @giant, price: @giant.price, quantity: 8)
 
-      expect(Item.top_five).to eq({"#{@hippo_2.id}": 11, "#{@giant.id}": 10, "#{@ogre.id}": 8, "#{@ogre_2.id}": 5, "#{@hippo.id}": 3})
+      expect(Item.top_five).to eq([@hippo_2, @giant, @ogre, @ogre_2, @hippo])
     end
   end
 end
