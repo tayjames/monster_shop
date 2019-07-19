@@ -6,6 +6,8 @@ class ItemsController < ApplicationController
     else
       @items = Item.enabled_items
     end
+    @top_five = Item.top_five
+    @bottom_five = Item.bottom_five
   end
 
   def show

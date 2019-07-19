@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by_email(params[:email])
-    if user && user.authenticate(params[:password]) #if user exists and the pw is authenticated, then store user in session
+    if user && user.authenticate(params[:password]) 
       session[:user_id] = user.id
 
       if current_merchant_user?

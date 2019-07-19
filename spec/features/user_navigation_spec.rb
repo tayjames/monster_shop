@@ -12,7 +12,6 @@ describe "User visits categories index page" do
       fill_in 'Password', with: user_1.password
 
       click_button 'Login'
-      # save_and_open_page
 
       expect(page).to have_content("Profile")
       expect(page).to have_content("Logout")
