@@ -1,9 +1,15 @@
 class OrdersController < ApplicationController
+
   def show
     @order = Order.find(params[:id])
   end
 
   def new
+    if current_user == nil
+      link = "<a href=\"#{url_for(register_path)}\">Register</a>"
+      flash[:error] = "You must #{link} to finish checkout"
+      redirect_to cart_path
+    end
   end
 
   def create

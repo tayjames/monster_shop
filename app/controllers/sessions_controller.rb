@@ -1,5 +1,21 @@
 class SessionsController < ApplicationController
   def new
+    # binding.pry
+    if current_user
+      if current_merchant_admin?
+        redirect_to (merchant_dashboard_path)
+        flash[:success] = "You are already logged in"
+      elsif current_merchant_user?
+        redirect_to (merchant_dashboard_path)
+        flash[:success] = "You are already logged in"
+      elsif current_registered_user?
+        redirect_to (user_profile_path(current_user))
+        flash[:success] = "You are already logged in"
+      else current_admin?
+        redirect_to (admin_dashboard_path)
+        flash[:success] = "You are already logged in"
+      end
+    end
   end
 
   def create
@@ -7,16 +23,13 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password]) #if user exists and the pw is authenticated, then store user in session
       session[:user_id] = user.id
 
-      if current_merchant?
-      redirect_to merchant_dashboard_path
-
+      if current_merchant_user?
+        redirect_to merchant_dashboard_path
       elsif current_registered_user?
         redirect_to profile_path
-
       elsif current_admin?
         redirect_to admin_dashboard_path
       end
-
       flash[:message] = "You are now Logged in #{user.name}"
     else
       flash[:notice] = "Email/Password incorrect."

@@ -20,11 +20,6 @@ describe "Merchant Navigation Restrictions" do
       visit '/admin/dashboard'
       expect(page).to have_content("404: The page you were looking for doesn't exist")
 
-      visit '/profile'
-      expect(page).to have_content("404: The page you were looking for doesn't exist")
-
-      visit '/cart'
-      expect(page).to have_content("404: The page you were looking for doesn't exist")
 
 
     end
