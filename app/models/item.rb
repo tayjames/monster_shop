@@ -27,5 +27,6 @@ class Item < ApplicationRecord
   end
 
   def self.bottom_five
+    Item.joins(:order_items).select('items.*, sum(order_items.quantity) as total_quantity').group(:id).order('total_quantity').limit(5)
   end
 end

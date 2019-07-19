@@ -113,8 +113,15 @@ RSpec.describe 'Item Index Page' do
         expect(page).to have_content(@hippo.name)
         expect(page).to_not have_content(@giant_2.name)
       end
+
       within ".item_stats" do
         expect(page).to have_content("Least Purchased 5 Items")
+        expect(page).to have_content(@hippo_2.name)
+        expect(page).to have_content(@giant.name)
+        expect(page).to have_content(@ogre.name)
+        expect(page).to have_content(@ogre_2.name)
+        expect(page).to have_content(@hippo.name)
+        expect(page).to_not have_content(@giant_2.name)
       end
     end
   end

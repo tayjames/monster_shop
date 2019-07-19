@@ -20,11 +20,14 @@
 
 <section class="item_stats">
   <h3>Top 5 Items</h3>
-  <%= @top_five.map do |item| %>
+  <% @top_five.map do |item| %>
     <h4><%= item.name %></h4>
     <h5>Quantity Ordered: <%= item.total_quantity %></h5>
   <% end %>
 
   <h3>Least Purchased 5 Items</h3>
-  <%= @items.bottom_five %>
+  <% @bottom_five.map do |item| %>
+    <h4><%= item.name %></h4>
+    <h5>Quantity Ordered: <%= item.total_quantity %></h5>
+  <% end %>
 </section>
