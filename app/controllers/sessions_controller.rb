@@ -24,9 +24,9 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
 
       if current_merchant_user?
-      redirect_to merchant_dashboard_path
+        redirect_to merchant_dashboard_path
       elsif current_registered_user?
-        redirect_to user_profile_path(user)
+        redirect_to profile_path
       elsif current_admin?
         redirect_to admin_dashboard_path
       end
