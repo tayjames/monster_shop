@@ -13,7 +13,7 @@ RSpec.describe 'User Update' do
         click_button("Login")
 
         expect(@user_1.role).to eq("registered_user")
-        visit user_profile_path(@user_1)
+        visit profile_path
       end
 
       it "I can edit my profile" do
@@ -22,11 +22,11 @@ RSpec.describe 'User Update' do
 
 
 
-        visit user_profile_path(@user_1)
+        visit profile_path
 
         click_button 'Edit Profile'
 
-        expect(current_path).to eq(edit_user_profile_path(@user_1))
+        expect(current_path).to eq(edit_profile_path)
 
         expect(find_field('Name').value).to eq(@user_1.name)
         expect(find_field('Address').value).to eq(@user_1.address)
@@ -46,7 +46,7 @@ RSpec.describe 'User Update' do
 
         click_on 'Update Profile'
 
-        expect(current_path).to eq(user_profile_path(@user_1))
+        expect(current_path).to eq(profile_path)
 
         expect(page).to have_content("Your Profile has been updated.")
         expect(page).to have_content("McLovin'")
@@ -59,7 +59,7 @@ RSpec.describe 'User Update' do
 
       it "I cannot leave fields blank while updating my profile" do
 
-        
+
         click_button 'Edit Profile'
 
         fill_in "Name", with: ""
@@ -71,7 +71,7 @@ RSpec.describe 'User Update' do
 
         click_on 'Update Profile'
 
-        expect(current_path).to eq(user_profile_path(@user_1))
+        expect(current_path).to eq(profile_path)
 
         expect(page).to have_content("Email can't be blank, Name can't be blank, Address can't be blank, City can't be blank, State can't be blank, and Zip is not a number")
       end
@@ -89,7 +89,7 @@ RSpec.describe 'User Update' do
 
         click_button 'Update Password'
 
-        expect(current_path).to eq(user_profile_path(@user_1))
+        expect(current_path).to eq(profile_path)
         expect(page).to have_content("Your password has been updated")
       end
 
@@ -101,7 +101,7 @@ RSpec.describe 'User Update' do
 
         click_button 'Update Password'
 
-        expect(current_path).to eq(user_profile_path(@user_1))
+        expect(current_path).to eq(profile_path)
         expect(page).to have_content("Password confirmation doesn't match Password")
       end
 

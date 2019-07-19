@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
         redirect_to (merchant_dashboard_path)
         flash[:success] = "You are already logged in"
       elsif current_registered_user?
-        redirect_to (user_profile_path(current_user))
+        redirect_to (profile_path)
         flash[:success] = "You are already logged in"
       else current_admin?
         redirect_to (admin_dashboard_path)
@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by_email(params[:email])
-    if user && user.authenticate(params[:password]) 
+    if user && user.authenticate(params[:password])
       session[:user_id] = user.id
 
       if current_merchant_user?
