@@ -173,7 +173,7 @@ RSpec.describe "User Login" do
 
       click_button("Login")
 
-      expect(current_path).to eq(user_profile_path(user))
+      expect(current_path).to eq(profile_path)
       expect(current_path).to_not eq(merchant_dashboard_path)
 
 
