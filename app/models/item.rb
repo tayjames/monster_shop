@@ -21,4 +21,12 @@ class Item < ApplicationRecord
   def self.enabled_items
     Item.where(active: true)
   end
+
+  def self.top_five
+    # binding.pry
+    items = Item.joins(:order_items).select('items.*, sum(quantity)').group(:id).order(:sum_item)
+  end
+
+  def self.bottom_five
+  end
 end

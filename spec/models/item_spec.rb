@@ -44,6 +44,26 @@ RSpec.describe Item do
     it '#enabled_items' do
       expect(Item.enabled_items).to_not eq([@ogre_2, @giant_2])
     end
+
+    it '#top_five' do
+      @brian = Merchant.create!(name: 'Brians Bagels', address: '125 Main St', city: 'Denver', state: 'CO', zip: 80218)
+      @hippo = @brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 6 )
+      @hippo_2 = @brian.items.create!(name: 'Pippo the Hippo', description: "I'm a Peppy Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 14 )
+      @user = User.create!(email: "email@email.com", password: "password", name: "Mellie", address: "Streeterville", city: "Riot", state: "WA", zip: 98765)
+      @order_1 = @user.orders.create!(name: 'Megan M', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
+      @order_2 = @user.orders.create!(name: 'Megan M', address: '123 Main St', city: 'Denver', state: 'IA', zip: 80218)
+      @order_3 = @user.orders.create!(name: 'Megan M', address: '123 Main St', city: 'Denver', state: 'IA', zip: 80218)
+      @order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2)
+      @order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 4)
+      @order_1.order_items.create!(item: @hippo, price: @hippo.price, quantity: 3)
+      @order_2.order_items.create!(item: @giant, price: @giant.price, quantity: 2)
+      @order_2.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2)
+      @order_2.order_items.create!(item: @hippo_2, price: @hippo_2.price, quantity: 11)
+      @order_3.order_items.create!(item: @ogre_2, price: @ogre_2.price, quantity: 5)
+      @order_3.order_items.create!(item: @giant, price: @giant.price, quantity: 8)
+
+      expect(Item.top_five).to eq({"#{@hippo_2.id}": 11, "#{@giant.id}": 10, "#{@ogre.id}": 8, "#{@ogre_2.id}": 5, "#{@hippo.id}": 3})
+    end
   end
 end
 end

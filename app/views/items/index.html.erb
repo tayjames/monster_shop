@@ -17,3 +17,11 @@
     <p><%= item.active ? "Active" : "Inactive" %></p>
   </section>
 <% end %>
+
+<section class="item_stats">
+  <h3>Top 5 Items</h3>
+  <%= @items.top_five %>
+
+  <h3>Least Purchased 5 Items</h3>
+  <%= @items.bottom_five %>
+</section>
