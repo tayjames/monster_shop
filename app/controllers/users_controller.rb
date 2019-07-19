@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :get_user, only: [:show, :edit, :update]
+  before_action :get_user, only: [:show, :edit, :update, :edit_password, :update_password]
   def register
 
   end
@@ -23,19 +23,50 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def edit_password
+  end
+
   def update
-    @user.update(user_params)
-    flash[:notice] = "Your Profile has been updated."
-    redirect_to user_profile_path(@user)
+    if @user.update(user_params)
+      flash[:notice] = "Your Profile has been updated."
+      redirect_to user_profile_path(@user)
+    else
+      flash[:alert] = @user.errors.full_messages.to_sentence
+      render :edit
+    end
+  end
+
+  def update_password
+    if @user.update(user_params)
+      flash[:notice] = "Your password has been updated."
+      redirect_to user_profile_path(@user)
+    else
+      flash[:alert] = @user.errors.full_messages.to_sentence
+      render :edit_password
+    end
   end
 
   private
 
   def user_params
-    params.permit(:name, :address, :city, :state, :zip, :role, :email, :password)
+    params.permit(
+      :name,
+      :address,
+      :city,
+      :state,
+      :zip,
+      :role,
+      :email,
+      :password,
+      :password_confirmation
+    )
   end
 
   def get_user
-    @user = User.find(params[:id])
+    if current_registered_user?
+      @user = User.find(session[:user_id])
+    else
+      render file: "/public/404"
+    end
   end
 end

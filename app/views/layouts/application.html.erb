@@ -17,11 +17,20 @@
       <% end %>
       <%= link_to 'Merchants', '/merchants' %>
       <%= link_to 'Items', '/items' %>
-      <%= link_to "Cart: #{cart.count}", cart_path %>
-      <% if !current_user.nil?  %>
+      <% if !current_user.nil? %>
         <%= link_to 'Profile', user_profile_path(current_user) %>
         <%= link_to 'Logout', logout_path %>
       <% end %>
+      <% if !current_user.nil? && current_admin?  %>
+        <%= link_to "Admin Dashboard", admin_dashboard_path %>
+        <%= link_to "All Users", admin_all_users_path %>
+      <% end %>
+      <% unless !current_user.nil? && current_admin? %>
+      <%= link_to "Cart: #{cart.count}", cart_path %>
+      <% end %>
+
+
+
     </nav>
     <% flash.each do |type, message| %>
     <p><%= message %></p>

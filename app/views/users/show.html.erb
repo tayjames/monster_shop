@@ -6,3 +6,6 @@
 <p>ZIP: <%= @user.zip %></p>
 <p>E-Mail: <%= @user.email %></p>
 <%= button_to 'Edit Profile', edit_user_profile_path(@user), method: :get %>
+
+<%= button_to 'Edit Password', edit_password_path(@user), method: :get %>
+
