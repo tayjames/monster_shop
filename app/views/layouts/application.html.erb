@@ -17,7 +17,7 @@
       <% end %>
       <%= link_to 'Merchants', '/merchants' %>
       <%= link_to 'Items', '/items' %>
-      <% if !current_user.nil?  %>
+      <% if !current_user.nil? %>
         <%= link_to 'Profile', user_profile_path(current_user) %>
         <%= link_to 'Logout', logout_path %>
       <% end %>

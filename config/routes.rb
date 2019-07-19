@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new]
 
   get '/register', to: 'users#register'
+  get '/profile', to: 'users#show'
   post '/profile', to: 'users#create'
   get '/profile/:id', to: 'users#show', as: 'user_profile'
   get '/profile/:id/edit', to: 'users#edit', as: 'edit_user_profile'

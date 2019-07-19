@@ -65,6 +65,10 @@ class UsersController < ApplicationController
 
 
   def get_user
-    @user = User.find(params[:id])
+    if current_registered_user?
+      @user = User.find(session[:user_id])
+    else
+      render file: "/public/404"
+    end
   end
 end

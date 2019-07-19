@@ -19,6 +19,7 @@ describe "User visits categories index page" do
       expect(page).to have_content("Admin Dashboard")
       expect(page).to have_content("All Users")
 
+
       expect(page).to_not have_content("Login")
       expect(page).to_not have_content("Register")
       expect(page).to_not have_content("Cart:")

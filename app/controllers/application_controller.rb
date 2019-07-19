@@ -20,14 +20,14 @@ class ApplicationController < ActionController::Base
 
 
   def current_registered_user?
-    current_user.role == "registered_user"
+    current_user && current_user.registered_user?
   end
 
   def current_merchant?
-    current_user.merchant_id
+    current_user && current_user.merchant_id?
   end
 
   def current_admin?
-    current_user.role == "admin"
+    current_user && current_user.admin?
   end
 end
