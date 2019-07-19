@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    if current_merchant? || current_admin?
+    if current_merchant_admin? || current_admin?
       render file: "/public/404"
     end
   end
