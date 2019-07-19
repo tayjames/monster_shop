@@ -13,5 +13,6 @@ class User < ApplicationRecord
   validates :zip, numericality: true
 
   has_secure_password
+
   enum role: ["visitor", "registered_user", "merchant", "admin"]
 end
