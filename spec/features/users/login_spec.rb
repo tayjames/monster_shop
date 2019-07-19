@@ -66,7 +66,7 @@ RSpec.describe "User Login" do
           click_button("Login")
           visit login_path
 
-          expect(current_path).to eq(user_profile_path(user))
+          expect(current_path).to eq(profile_path)
           expect(page).to have_content("You are already logged in")
         end
 

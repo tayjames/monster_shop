@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       flash[:notice] = "Thanks for Registering"
       flash[:message] = "You are now Logged in #{@user.name}"
-      redirect_to user_profile_path(@user)
+      redirect_to profile_path
     else
       flash[:notice] = @user.errors.full_messages.to_sentence
       render :register
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       flash[:notice] = "Your Profile has been updated."
-      redirect_to user_profile_path(@user)
+      redirect_to profile_path
     else
       flash[:alert] = @user.errors.full_messages.to_sentence
       render :edit
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   def update_password
     if @user.update(user_params)
       flash[:notice] = "Your password has been updated."
-      redirect_to user_profile_path(@user)
+      redirect_to profile_path
     else
       flash[:alert] = @user.errors.full_messages.to_sentence
       render :edit_password
@@ -68,7 +68,7 @@ class UsersController < ApplicationController
   def get_user
     if current_registered_user?
       @user = User.find(session[:user_id])
-    elsif
+    else
       render file: "/public/404"
     end
   end
