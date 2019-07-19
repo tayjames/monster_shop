@@ -20,7 +20,10 @@
 
 <section class="item_stats">
   <h3>Top 5 Items</h3>
-  <%= @items.top_five %>
+  <%= @items.top_five.each do |item| %>
+    <%= item.name %>
+    <% binding.pry %>
+  <% end %>
 
   <h3>Least Purchased 5 Items</h3>
   <%= @items.bottom_five %>
