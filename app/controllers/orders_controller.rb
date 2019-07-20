@@ -25,6 +25,10 @@ class OrdersController < ApplicationController
     end
   end
 
+  def index
+    @orders = current_user.orders
+  end
+
   # private
   #
   # def order_params

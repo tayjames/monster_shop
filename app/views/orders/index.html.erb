@@ -1,0 +1,14 @@
+<h1>Orders</h1>
+
+<section class="orders">
+  <% @orders.each do |order| %>
+    <h3>Order Number: <%= order.id %></h3>
+    <h4>Shipping Details</h4>
+    <p><%= order.name %></p>
+    <p><%= order.address %></p>
+    <p><%= order.city %></p>
+    <p><%= order.state %></p>
+    <p><%= order.zip %></p>
+    <p>Order Total: <%= number_to_currency(order.grand_total) %></p>
+  <% end %>
+</section>
