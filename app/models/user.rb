@@ -16,4 +16,7 @@ class User < ApplicationRecord
 
   enum role: ["visitor", "registered_user", "merchant_admin", "admin"]
 
+  def orders?
+    orders.empty?
+  end
 end
