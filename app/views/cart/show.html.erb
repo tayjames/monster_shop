@@ -20,7 +20,7 @@
 <% end %>
 
 <% if current_user && !cart.items.empty?  %>
-  <%= button_to 'Check Out', new_order_path, method: :get %>
+  <%= button_to 'Check Out', profile_orders_path, method: :post %>
 <% else %>
   <p> Must <%= link_to 'register', register_path %> or <%= link_to 'login', login_path %>.</p>
 <% end %>

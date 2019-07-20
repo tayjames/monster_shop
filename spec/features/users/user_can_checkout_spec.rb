@@ -26,7 +26,6 @@ RSpec.describe 'User checkout' do
             click_on('Check Out')
 
             order = Order.last
-            # binding.pry
 
             expect(order.status).to eq("pending")
             expect(order.user_id).to eq(@user.id)

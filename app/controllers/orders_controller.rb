@@ -4,17 +4,13 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
-  def new
+  def create
     if current_user == nil
       link = "<a href=\"#{url_for(register_path)}\">Register</a>"
       flash[:error] = "You must #{link} to finish checkout"
       redirect_to cart_path
     end
-  end
-
-  def create
-    binding.pry
-    order = Order.new(order_params)
+    order = Order.new(user_id: current_user.id, name: current_user[:name], address: current_user[:address], city: current_user[:city], state: current_user[:state], zip: current_user[:zip])
     if order.save
       cart.items.each do |item|
         order.order_items.create({
@@ -24,16 +20,14 @@ class OrdersController < ApplicationController
           })
       end
       session.delete(:cart)
-      redirect_to order_path(order)
-    else
-      flash[:notice] = "Please complete address form to create an order."
-      render :new
+      redirect_to profile_orders_path
+      flash[:notice] = "Your order has been created!"
     end
   end
 
-  private
-
-  def order_params
-    params.permit(:name, :address, :city, :state, :zip)
-  end
+  # private
+  #
+  # def order_params
+  #   params.require(:user).permit(:name, :address, :city, :state, :zip)
+  # end
 end
