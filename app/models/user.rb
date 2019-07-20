@@ -15,5 +15,4 @@ class User < ApplicationRecord
   has_secure_password
 
   enum role: ["visitor", "registered_user", "merchant_admin", "admin"]
-
 end

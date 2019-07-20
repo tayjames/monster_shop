@@ -24,14 +24,6 @@ describe "Admin Navigation Restrictions" do
 
       visit '/cart'
       expect(page).to have_content("404: The page you were looking for doesn't exist")
-
-
     end
   end
 end
-
-# As a Admin
-# When I try to access any path that begins with the following, then I see a 404 error:
-# - '/profile'
-# - '/merchant'
-# - '/cart'
