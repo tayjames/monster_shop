@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   patch '/cart/:change/:item_id', to: 'cart#update_quantity'
   delete '/cart/:item_id', to: 'cart#remove_item'
 
-  resources :orders, only: [:new, :create, :show]
+  resources :orders, only: [:new, :create]
 
   resources :users, only: [:new]
 
@@ -32,10 +32,13 @@ Rails.application.routes.draw do
   put 'profile/', to: 'users#update'
   patch 'profile/', to: 'users#update_password', as: 'update_password'
   get 'profile/orders', to: 'orders#index', as: 'profile_orders'
+  get 'profile/order/:id', to: 'orders#show', as: 'profile_order'
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create', as: 'user_login'
   get '/logout', to: 'sessions#destroy'
+
+
 
   namespace :merchant do
     get '/dashboard', to: 'dashboard#index', as: 'dashboard'
