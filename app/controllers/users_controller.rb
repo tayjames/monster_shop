@@ -67,7 +67,8 @@ class UsersController < ApplicationController
 
   def get_user
     if current_registered_user?
-      @user = User.find(session[:user_id])
+      @user = current_user
+      # @user = User.find(session[:user_id])
     else
       render file: "/public/404"
     end
