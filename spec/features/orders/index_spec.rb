@@ -30,11 +30,21 @@ RSpec.describe 'As a registered user' do
       within "#order-#{@order_1.id}" do
         expect(page).to have_content("Order ID:")
         expect(page).to have_link(@order_1.id)
-        expect(page).to have_content("Date Created: #{@order.created_at}")
-        expect(page).to have_content("Date Updated: #{@order.updated_at}")
-        expect(page).to have_content("Status: #{@order.status}")
-        expect(page).to have_content("Total Quantity of Items: #{@order.total_quantity}")
-        expect(page).to have_content("Grand Total: #{@order.grand_total}")
+        expect(page).to have_content("Date Created: #{@order_1.created_at.strftime("%m/%d/%Y")}")
+        expect(page).to have_content("Date Updated: #{@order_1.updated_at.strftime("%m/%d/%Y")}")
+        expect(page).to have_content("Status: #{@order_1.status}")
+        expect(page).to have_content("Total Quantity of Items: #{@order_1.total_quantity}")
+        expect(page).to have_content("Grand Total: #{@order_1.grand_total}")
+      end
+
+      within "#order-#{@order_2.id}" do
+        expect(page).to have_content("Order ID:")
+        expect(page).to have_link(@order_2.id)
+        expect(page).to have_content("Date Created: #{@order_2.created_at.strftime("%m/%d/%Y")}")
+        expect(page).to have_content("Date Updated: #{@order_2.updated_at.strftime("%m/%d/%Y")}")
+        expect(page).to have_content("Status: #{@order_2.status}")
+        expect(page).to have_content("Total Quantity of Items: #{@order_2.total_quantity}")
+        expect(page).to have_content("Grand Total: #{@order_2.grand_total}")
       end
     end
   end
