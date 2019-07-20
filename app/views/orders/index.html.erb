@@ -1,0 +1,12 @@
+<h1>My Orders</h1>
+
+<% @orders.each do |order| %>
+  <section id="order-<%= order.id %>">
+    <h2>Order ID: <%= link_to order.id, order_path(order) %></h2>
+    <p>Date Created: <%= order.created_at %></p>
+    <p>Date Updated: <%= order.updated_at %></p>
+    <p>Status: <%= order.status %></p>
+    <p>Total Quantity of Items: <%= order.total_quantity %></p>
+    <p>Grand Total: <%= order.grand_total %></p>
+  </section>
+<% end %>
