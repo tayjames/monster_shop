@@ -49,7 +49,11 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    get '/users', to: "dashboard#all", as: 'all_users'
+    # get '/users', to: "dashboard#all", as: 'all_users'
+    get '/users', to: "users#index", as: 'all_users'
+    get '/users/:id', to: "users#show"
     get '/dashboard', to: 'dashboard#index', as: :dashboard
+    put '/merchants/:id', to: 'merchants#disable', as: :disable
+    patch '/merchants/:id', to: 'merchants#enable', as: :enable
   end
 end

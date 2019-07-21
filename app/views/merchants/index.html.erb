@@ -2,5 +2,12 @@
 <% @merchants.each do |merchant| %>
   <section id='merchant-<%= merchant.id %>'>
     <h2><%= link_to merchant.name, "/merchants/#{merchant.id}" %></h2>
+    <h2><%= merchant.city %></h2>
+    <h2><%= merchant.state %></h2>
+    <% if current_admin? && merchant.enabled == false %>
+      <%= button_to 'Enable', admin_enable_url(merchant.id), method: :patch %>
+    <% else %>
+      <%= button_to 'Disable', admin_disable_path(merchant.id), method: :put %>
+      <% end %>
   </section>
 <% end %>
