@@ -43,15 +43,15 @@ RSpec.describe "Merchant Dashboard/Profile Show Page" do
 
     it "I see a list of pending orders with items I sell" do
       visit merchant_dashboard_path
-
-      within "#id-#{@order_1}" do
+      save_and_open_page
+      within "#id-#{@order_1.id}" do
         expect(page).to have_content("Order Number: #{@order_1.id}")
         expect(page).to have_content("Order Date: #{@order_1.created_at}")
-        expect(page).to have_content("Total Quantity: #{@order_1.order_items.quantity}")
+        expect(page).to have_content("Total Quantity of My Items: #{@order_1.total_quantity}")
         expect(page).to have_content("Order Total: #{@order_1.grand_total}")
       end
 
-      within "#id-#{@order_1}" do
+      within "#id-#{@order_1.id}" do
         click_link "#{@order_1.id}"
         expect(current_path).to eq(merchant_orders_show_path(@order_1))
       end
