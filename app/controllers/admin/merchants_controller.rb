@@ -7,11 +7,8 @@ class Admin::MerchantsController < Admin::BaseController
   end
 
   def disable
-    # binding.pry
     @merchant = Merchant.find(params[:id])
     @merchant.update(enabled: false)
-    # binding.pry
     redirect_to merchants_path
   end
-
 end
