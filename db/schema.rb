@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20190715192930) do
     t.string "city"
     t.string "state"
     t.integer "zip"
+    t.string "status", default: "Pending"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
