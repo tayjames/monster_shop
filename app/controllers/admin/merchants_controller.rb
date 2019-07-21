@@ -10,5 +10,6 @@ class Admin::MerchantsController < Admin::BaseController
     @merchant = Merchant.find(params[:id])
     @merchant.update(enabled: false)
     redirect_to merchants_path
+    flash[:disable] = "#{@merchant.name} has now been disabled"
   end
 end
