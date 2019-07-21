@@ -8,7 +8,9 @@ class Order < ApplicationRecord
                         :address,
                         :city,
                         :state,
-                        :zip
+                        :zip,
+                        :status
+  enum status: ["pending", "packaged", "shipped", "cancelled"]
 
   def grand_total
     order_items.sum('price * quantity')
