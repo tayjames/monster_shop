@@ -20,8 +20,10 @@ Rails.application.routes.draw do
   patch '/cart/:change/:item_id', to: 'cart#update_quantity'
   delete '/cart/:item_id', to: 'cart#remove_item'
 
+
   post '/profile/orders', to: 'orders#create', as: 'create_order'
-  get '/profile/orders', to: 'orders#index'
+
+
 
   resources :users, only: [:new]
 
@@ -32,10 +34,14 @@ Rails.application.routes.draw do
   get '/profile/edit_password', to: 'users#edit_password', as: 'edit_password'
   put 'profile/', to: 'users#update'
   patch 'profile/', to: 'users#update_password', as: 'update_password'
+  get 'profile/orders', to: 'orders#index', as: 'profile_orders'
+  get 'profile/order/:id', to: 'orders#show', as: 'profile_order'
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create', as: 'user_login'
   get '/logout', to: 'sessions#destroy'
+
+
 
   namespace :merchant do
     get '/dashboard', to: 'dashboard#index', as: 'dashboard'
@@ -44,7 +50,11 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    get '/users', to: "dashboard#all", as: 'all_users'
+    # get '/users', to: "dashboard#all", as: 'all_users'
+    get '/users', to: "users#index", as: 'all_users'
+    get '/users/:id', to: "users#show"
     get '/dashboard', to: 'dashboard#index', as: :dashboard
+    put '/merchants/:id', to: 'merchants#disable', as: :disable
+    patch '/merchants/:id', to: 'merchants#enable', as: :enable
   end
 end
