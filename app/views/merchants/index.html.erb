@@ -6,7 +6,7 @@
     <h2><%= merchant.state %></h2>
     <% if current_admin? && merchant.enabled == false %>
       <%= button_to 'Enable', admin_enable_url(merchant.id), method: :patch %>
-    <% else current_admin? && merchant.enabled == true %>
+    <% else %>
       <%= button_to 'Disable', admin_disable_path(merchant.id), method: :put %>
       <% end %>
   </section>
