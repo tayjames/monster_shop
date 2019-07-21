@@ -42,7 +42,9 @@ RSpec.describe "Admin Merchant Index Page" do
         click_button "Enable"
       end
       expect(current_path).to eq(merchants_path)
+      save_and_open_page
       expect(@megan.reload.enabled).to eq(true)
+      expect(page).to have_content("#{@megan.name} has been enabled")
     end
 
     it "I see a disable/enable button next to any merchants whose accts are enabled/disabled" do
@@ -61,7 +63,6 @@ RSpec.describe "Admin Merchant Index Page" do
         click_button 'Disable'
       end
       expect(current_path).to eq(merchants_path)
-      save_and_open_page
       expect(@brian.reload.enabled).to eq(false)
       expect(page).to have_content("#{@brian.name} has now been disabled")
     end
