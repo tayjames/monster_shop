@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
 
   post '/profile/orders', to: 'orders#create', as: 'create_order'
-  get '/profile/orders', to: 'orders#index'
+
 
 
   resources :users, only: [:new]
