@@ -20,7 +20,10 @@ Rails.application.routes.draw do
   patch '/cart/:change/:item_id', to: 'cart#update_quantity'
   delete '/cart/:item_id', to: 'cart#remove_item'
 
-  resources :orders, only: [:new, :create]
+
+  post '/profile/orders', to: 'orders#create', as: 'create_order'
+  get '/profile/orders', to: 'orders#index'
+
 
   resources :users, only: [:new]
 
@@ -42,6 +45,7 @@ Rails.application.routes.draw do
 
   namespace :merchant do
     get '/dashboard', to: 'dashboard#index', as: 'dashboard'
+    get '/', to: 'dashboard#show', as: 'dashboard_show'
   end
 
   namespace :admin do

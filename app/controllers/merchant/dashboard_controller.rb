@@ -1,10 +1,12 @@
 class Merchant::DashboardController < ApplicationController
   before_action :require_merchant
 
-
-
   def index
+  end
 
+  def show
+    merchant_id = current_user.merchant_id
+    @merchant = Merchant.find(merchant_id)
   end
 
 private
