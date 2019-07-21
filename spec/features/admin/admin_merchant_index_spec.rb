@@ -53,8 +53,6 @@ RSpec.describe "Admin Merchant Index Page" do
       click_button 'Login'
       visit '/merchants'
 
-      save_and_open_page
-
       expect(@brian.enabled).to eq(true)
 
       within "#merchant-#{@brian.id}" do
