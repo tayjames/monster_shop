@@ -32,15 +32,7 @@ RSpec.describe 'User checkout' do
             expect(current_path).to eq(profile_orders_path)
             expect(page).to have_content("Your order has been created!")
 
-            within ".orders" do
-              expect(page).to have_content("#{order.id}")
-              expect(page).to have_content("#{order.name}")
-              expect(page).to have_content("#{order.address}")
-              expect(page).to have_content("#{order.city}")
-              expect(page).to have_content("#{order.state}")
-              expect(page).to have_content("#{order.zip}")
-              expect(page).to have_content("#{order.grand_total}")
-            end
+            
             expect(page).to have_content("Cart: 0")
           end
         end
