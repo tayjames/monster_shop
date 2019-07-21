@@ -9,7 +9,10 @@
     </section>
   <% end %>
 
-<%= form_tag orders_path do %>
+<!-- <%= form_tag profile_orders_path do %>
+
+  <%= hidden_field_tag :current_user %>
+
   <%= label_tag :name %>
   <%= text_field_tag :name %>
 
@@ -26,4 +29,5 @@
   <%= number_field_tag :zip %>
 
   <%= submit_tag 'Create Order' %>
-<% end %>
+
+<% end %> -->

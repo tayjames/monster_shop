@@ -1,6 +1,6 @@
 <h1>Edit Profile</h1>
 
-<%= form_tag user_profile_path(@user), method: :put do  %>
+<%= form_tag profile_path, method: :put do  %>
     <%= label_tag :name %>
     <%= text_field_tag :name, @user.name %>
 

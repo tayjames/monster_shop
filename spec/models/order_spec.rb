@@ -13,6 +13,7 @@ RSpec.describe Order do
     it {should validate_presence_of :city}
     it {should validate_presence_of :state}
     it {should validate_presence_of :zip}
+    it {should validate_presence_of :status}
   end
 
   describe 'instance methods' do
@@ -35,6 +36,11 @@ RSpec.describe Order do
     it '.grand_total' do
       expect(@order_1.grand_total).to eq(190.5)
       expect(@order_2.grand_total).to eq(140.5)
+    end
+
+    it ".total_quantity" do
+      expect(@order_1.total_quantity).to eq(5)
+      expect(@order_2.total_quantity).to eq(4)
     end
   end
 end

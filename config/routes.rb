@@ -20,25 +20,32 @@ Rails.application.routes.draw do
   patch '/cart/:change/:item_id', to: 'cart#update_quantity'
   delete '/cart/:item_id', to: 'cart#remove_item'
 
-  resources :orders, only: [:new, :create, :show]
+
+  post '/profile/orders', to: 'orders#create', as: 'create_order'
+  get '/profile/orders', to: 'orders#index'
+
 
   resources :users, only: [:new]
 
   get '/register', to: 'users#register'
   get '/profile', to: 'users#show'
   post '/profile', to: 'users#create'
-  get '/profile/:id', to: 'users#show', as: 'user_profile'
-  get '/profile/:id/edit', to: 'users#edit', as: 'edit_user_profile'
-  get '/profile/:id/edit_password', to: 'users#edit_password', as: 'edit_password'
-  put 'profile/:id', to: 'users#update'
-  patch 'profile/:id', to: 'users#update_password', as: 'update_password'
+  get '/profile/edit', to: 'users#edit', as: 'edit_profile'
+  get '/profile/edit_password', to: 'users#edit_password', as: 'edit_password'
+  put 'profile/', to: 'users#update'
+  patch 'profile/', to: 'users#update_password', as: 'update_password'
+  get 'profile/orders', to: 'orders#index', as: 'profile_orders'
+  get 'profile/order/:id', to: 'orders#show', as: 'profile_order'
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create', as: 'user_login'
   get '/logout', to: 'sessions#destroy'
 
+
+
   namespace :merchant do
     get '/dashboard', to: 'dashboard#index', as: 'dashboard'
+    get '/', to: 'dashboard#show', as: 'dashboard_show'
   end
 
   namespace :admin do
