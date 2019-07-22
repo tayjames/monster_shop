@@ -9,6 +9,7 @@ class MerchantsController < ApplicationController
   end
 
   def new
+
   end
 
   def create
@@ -22,7 +23,7 @@ class MerchantsController < ApplicationController
   end
 
   def edit
-    @merchant = Merchant.find(params[:id])
+      @merchant = Merchant.find(params[:id])
   end
 
   def update
@@ -49,5 +50,9 @@ class MerchantsController < ApplicationController
 
   def merchant_params
     params.permit(:name, :address, :city, :state, :zip)
+  end
+
+  def require_merchant
+    render file: "/public/404" unless current_merchant_user?
   end
 end

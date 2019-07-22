@@ -1,5 +1,9 @@
 class Admin::MerchantsController < Admin::BaseController
 
+  def show
+    @merchant = Merchant.find(params[:id])
+  end
+
   def enable
     @merchant = Merchant.find(params[:id])
     @merchant.update(enabled: true)
@@ -19,4 +23,5 @@ class Admin::MerchantsController < Admin::BaseController
       item.update(active: false)
     end
   end
+
 end
