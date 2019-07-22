@@ -17,5 +17,14 @@ class Order < ApplicationRecord
   end
 
   def total_quantity
+    order_items.sum(:quantity)
+  end
+
+  def merchant_item_quantity(merchant)
+    binding.pry
+    Order.joins(:order_items).joins(:items).select(:items).where("#{item.merchant_id} = merchant.id").sum(:quantity)
+  end
+
+  def merchant_item_total
   end
 end

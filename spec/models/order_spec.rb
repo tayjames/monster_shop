@@ -25,7 +25,7 @@ RSpec.describe Order do
       @giant = @megan.items.create!(name: 'Giant', description: "I'm a Giant!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
       @hippo = @brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
       @user_1 = User.create!(email: "123@gmail.com", password: "password", name: "PapRica Jones", address: "456 Main St.", city: "Denver", state: "CO", zip: 80220, role: 1)
-      @order_1 = @user_1.orders.create!(name: 'Megan M', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
+      @order_1 = @user_1.orders.create!(name: 'Megan M', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218, status: 0)
       @order_2 = @user_1.orders.create!(name: 'Megan M', address: '123 Main St', city: 'Denver', state: 'IA', zip: 80218)
       @order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2)
       @order_1.order_items.create!(item: @hippo, price: @hippo.price, quantity: 3)
@@ -41,6 +41,13 @@ RSpec.describe Order do
     it ".total_quantity" do
       expect(@order_1.total_quantity).to eq(5)
       expect(@order_2.total_quantity).to eq(4)
+    end
+
+    it ".merchant_item_quantity(merchant)" do
+      expect(@order_1.merchant_item_quantity(@megan)).to eq(2)
+    end
+
+    it '.merchant_item_total' do
     end
   end
 end

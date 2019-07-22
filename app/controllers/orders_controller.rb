@@ -1,5 +1,9 @@
 class OrdersController < ApplicationController
 
+  def index
+    @orders = current_user.orders
+  end
+
   def show
     @order = Order.find(params[:id])
   end
@@ -28,10 +32,4 @@ class OrdersController < ApplicationController
   def index
     @orders = current_user.orders
   end
-
-  # private
-  #
-  # def order_params
-  #   params.require(:user).permit(:name, :address, :city, :state, :zip)
-  # end
 end
