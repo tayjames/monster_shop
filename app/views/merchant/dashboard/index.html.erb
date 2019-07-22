@@ -4,7 +4,8 @@
   <section id="id-<%= order.id %>">
   <h4>Order Number: <%= link_to order.id, merchant_orders_show_path(order) %></h4>
   <p>Order Date: <%= order.created_at %></p>
-  <p>Total Quantity of My Items: <%= order.merchant_item_quantity(@merchant) %></p>
-  <p>Order Total: <%= number_to_currency(order.merchant_item_total) %></p>
+
 <% end %>
 </section>
+
+<%= link_to "My Items", merchant_items_index_path %>

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :merchants do
-    resources :items, only: [:index, :new, :create]
+    resources :items, only: [:new, :create]
   end
 
   resources :items, only: [:index, :show, :edit, :update, :destroy] do
@@ -44,6 +44,7 @@ Rails.application.routes.draw do
     get '/dashboard', to: 'dashboard#index', as: 'dashboard'
     get '/', to: 'dashboard#show', as: 'dashboard_show'
     get '/orders/:order_id', to: 'orders#show', as: 'orders_show'
+    get '/items', to: 'items#index', as: 'items_index'
   end
 
   namespace :admin do
