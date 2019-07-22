@@ -41,9 +41,9 @@ RSpec.describe "Merchant Dashboard/Profile Show Page" do
       expect(page).to_not have_button("Edit Profile")
     end
 
-    it "I see a list of pending orders with items I sell" do
+    xit "I see a list of pending orders with items I sell" do
       visit merchant_dashboard_path
-      save_and_open_page
+
       within "#id-#{@order_1.id}" do
         expect(page).to have_content("Order Number: #{@order_1.id}")
         expect(page).to have_content("Order Date: #{@order_1.created_at}")
@@ -56,5 +56,11 @@ RSpec.describe "Merchant Dashboard/Profile Show Page" do
         expect(current_path).to eq(merchant_orders_show_path(@order_1))
       end
     end
+
+#     As a merchant
+# When I visit my merchant dashboard
+# I see a link to view my own items
+# When I click that link
+# My URI route should be "/merchant/items"
   end
 end
