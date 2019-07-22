@@ -1,4 +1,5 @@
 class Order < ApplicationRecord
+
   has_many :order_items
   has_many :items, through: :order_items
 
@@ -20,11 +21,11 @@ class Order < ApplicationRecord
     order_items.sum(:quantity)
   end
 
-  def merchant_item_quantity(merchant)
-    # binding.pry
-    Order.joins(:order_items).joins(:items).select(:items).where("#{item.merchant_id} = merchant.id").sum(:quantity)
+  def quantity_of_item(item)
+    order_items.where(item_id: item.id).sum(:quantity)
   end
 
-  def merchant_item_total
+  def pending?
+    status == "pending"
   end
 end

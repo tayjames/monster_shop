@@ -16,3 +16,6 @@
 
 <p>Total Quantity of Items: <%= @order.total_quantity %></p>
 <h3>Grand Total: <%= number_to_currency(@order.grand_total) %></h3>
+<% if @pending %>
+  <%= button_to 'Cancel Order', update_profile_order_path(@order.id), method: :patch %>
+<% end %>
