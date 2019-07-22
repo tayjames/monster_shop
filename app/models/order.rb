@@ -28,4 +28,8 @@ class Order < ApplicationRecord
   def pending?
     status == "pending"
   end
+
+  def merchant_item_quantity(merchant)
+    binding.pry
+  end
 end

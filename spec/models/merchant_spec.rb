@@ -49,5 +49,9 @@ RSpec.describe Merchant do
     it '.distinct_cities' do
       expect(@megan.distinct_cities).to eq(['Denver, CO', 'Denver, IA'])
     end
+
+    it '.total_items' do
+      expect(@megan.total_items(@order_1)).to eq(5)
+    end
   end
 end

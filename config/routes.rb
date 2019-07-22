@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :merchants do
-    resources :items, only: [:new, :create]
+    resources :items, only: [:new, :index, :create]
   end
 
   resources :items, only: [:index, :show, :edit, :update, :destroy] do
