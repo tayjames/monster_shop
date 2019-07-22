@@ -61,13 +61,7 @@ RSpec.describe "Merchant Dashboard/Profile Show Page" do
       visit merchant_dashboard_path
 
       click_link "My Items"
-      expect(current_path).to eq()
+      expect(current_path).to eq(merchant_items_path)
     end
-
-#     As a merchant
-# When I visit my merchant dashboard
-# I see a link to view my own items
-# When I click that link
-# My URI route should be "/merchant/items"
   end
 end
