@@ -57,6 +57,13 @@ RSpec.describe "Merchant Dashboard/Profile Show Page" do
       end
     end
 
+    it "I see a link to only my items" do
+      visit merchant_dashboard_path
+
+      click_link "My Items"
+      expect(current_path).to eq()
+    end
+
 #     As a merchant
 # When I visit my merchant dashboard
 # I see a link to view my own items
