@@ -9,13 +9,13 @@ RSpec.describe 'As a registered user' do
         @ogre = @megan.items.create!(name: 'Ogre', description: "I'm an Ogre!", price: 20, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 10 )
         @hippo = @brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 10 )
         @user_1 = User.create!(email: "123@gmail.com", password: "password", name: "PapRica Jones", address: "456 Main St.", city: "Denver", state: "CO", zip: 80220, role: 1)
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user_1)
         @order_1 = @user_1.orders.create!(name: "PapRica Jones", address: "456 Main St.", city: "Denver", state: "CO", zip: 80220)
         @order_2 = @user_1.orders.create!(name: "PapRica Jones", address: "456 Main St.", city: "Denver", state: "CO", zip: 80220)
         @order_item_1 = @order_1.order_items.create!(item: @ogre, quantity: 2, price: @ogre.price)
         @order_item_2 = @order_1.order_items.create!(item: @hippo, quantity: 4, price: @hippo.price)
         @order_2.order_items.create!(item: @ogre, quantity: 5, price: @ogre.price)
-        @order_2.order_items.create!(item: @hippo, quantity: 6, price: @hippo.price)
-        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user_1)
+        @order_2.order_items.create!(item: @hippo, quantity: 2, price: @hippo.price)
       end
 
       it "I see all information about the order, including the following information:\n
