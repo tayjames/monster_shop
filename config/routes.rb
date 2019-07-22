@@ -20,11 +20,6 @@ Rails.application.routes.draw do
   patch '/cart/:change/:item_id', to: 'cart#update_quantity'
   delete '/cart/:item_id', to: 'cart#remove_item'
 
-
-  post '/profile/orders', to: 'orders#create', as: 'create_order'
-
-
-
   resources :users, only: [:new]
 
   get '/register', to: 'users#register'
@@ -36,6 +31,8 @@ Rails.application.routes.draw do
   patch 'profile/', to: 'users#update_password', as: 'update_password'
   get 'profile/orders', to: 'orders#index', as: 'profile_orders'
   get 'profile/order/:id', to: 'orders#show', as: 'profile_order'
+  post '/profile/orders', to: 'orders#create', as: 'create_order'
+  patch 'profile/order/:id', to: 'orders#update', as: 'update_profile_order'
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create', as: 'user_login'

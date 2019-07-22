@@ -1,4 +1,5 @@
 class Order < ApplicationRecord
+
   has_many :order_items
   has_many :items, through: :order_items
 
@@ -18,5 +19,13 @@ class Order < ApplicationRecord
 
   def total_quantity
     order_items.sum(:quantity)
+  end
+
+  def quantity_of_item(item)
+    order_items.where(item_id: item.id).sum(:quantity)
+  end
+
+  def pending?
+    status == "pending"
   end
 end

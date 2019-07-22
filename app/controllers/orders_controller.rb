@@ -1,11 +1,12 @@
 class OrdersController < ApplicationController
+  before_action :get_order, only: [:show, :update]
 
   def index
     @orders = current_user.orders
   end
 
   def show
-    @order = Order.find(params[:id])
+    @pending = @order.pending?
   end
 
   def create
@@ -22,6 +23,7 @@ class OrdersController < ApplicationController
           quantity: cart.count_of(item.id),
           price: item.price
           })
+        item.update(inventory: item.inventory - cart.count_of(item.id))
       end
       session.delete(:cart)
       redirect_to profile_orders_path
@@ -29,11 +31,24 @@ class OrdersController < ApplicationController
     end
   end
 
-  def index
-    @orders = current_user.orders
+  def update
+    @order.update(status: 3)
+    @order.order_items.each do |order_item|
+      order_item.update(status: 0)
+    end
+
+    @order.items.each do |item|
+      item.update(inventory: item.inventory + @order.quantity_of_item(item))
+    end
+    flash[:notice] = "Order ID: #{@order.id} has been cancelled."
+    redirect_to profile_path
   end
 
-  # private
+  private
+
+  def get_order
+    @order = Order.find(params[:id])
+  end
   #
   # def order_params
   #   params.require(:user).permit(:name, :address, :city, :state, :zip)
