@@ -58,5 +58,9 @@ RSpec.describe Merchant do
       expect(@megan.item_quantity(@order_1)).to eq(2)
       expect(@brian.item_quantity(@order_1)).to eq(3)
     end
+
+    it '.item_total(order)' do
+      expect(@megan.item_total(@order_1)).to eq()
+    end
   end
 end
