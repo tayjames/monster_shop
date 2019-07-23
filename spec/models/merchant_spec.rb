@@ -60,7 +60,7 @@ RSpec.describe Merchant do
     end
 
     it '.item_total(order)' do
-      expect(@megan.item_total(@order_1)).to eq()
+      expect(@megan.item_total(@order_1)).to eq(20.25)
     end
   end
 end
