@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new]
 
   get '/register', to: 'users#register'
-  get '/profile', to: 'users#show'
+  get '/profile', to: 'users#show', as: 'profile'
   post '/profile', to: 'users#create'
   get '/profile/edit', to: 'users#edit', as: 'edit_profile'
   get '/profile/edit_password', to: 'users#edit_password', as: 'edit_password'

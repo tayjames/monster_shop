@@ -29,4 +29,8 @@ class Item < ApplicationRecord
   def self.bottom_five
     joins(:order_items).select('items.*, sum(order_items.quantity) as total_quantity').group(:id).order('total_quantity').limit(5)
   end
+
+  def any_orders?
+    order_items.empty?
+  end
 end
