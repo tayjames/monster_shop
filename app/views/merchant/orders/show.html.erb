@@ -1,7 +1,16 @@
 <h1>Order Details</h1>
 
-<p>User Name: <%= @order.name %></p>
-<p>User Street Address: <%= @order.address %></p>
-<p>User City: <%= @order.city %></p>
-<p>User State: <%= @order.state %></p>
-<p>User Zipcode: <%= @order.zip %></p>
+<p>User Name: <%= @user.name %></p>
+<p>User Street Address: <%= @user.address %></p>
+<p>User City: <%= @user.city %></p>
+<p>User State: <%= @user.state %></p>
+<p>User Zipcode: <%= @user.zip %></p>
+
+<h1>Items Ordered</h1>
+
+<% @merchant.items.each do |item| %>
+  <p>Item Name: <%= link_to item.name, item_path(item) %></p>
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw">
+  <p>Item Price: <%= number_to_currency(item.price) %></p>
+  <p>Total Ordered: <%= @order.quantity_of_item(item) %></p>
+<% end %>
