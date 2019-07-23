@@ -9,7 +9,10 @@ RSpec.describe 'Merchant Item Index Page' do
       @ogre = @megan.items.create!(name: 'Ogre', description: "I'm an Ogre!", price: 20, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 5 )
       @giant = @megan.items.create!(name: 'Giant', description: "I'm a Giant!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
       @hippo = @brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
+      @demon = @brian.items.create!(name: 'Demon', description: "I'm a Demon!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: false, inventory: 3 )
+      @user_2 = @brian.users.create!(email: "12345@gmail.com", password: "password", name: "Parsley Jones", address: "456 Main St.", city: "Denver", state: "CO", zip: 80220, role: 2)
     end
+    
     it 'I can see a list of that merchants items' do
       visit "/merchants/#{@megan.id}/items"
 
@@ -34,6 +37,36 @@ RSpec.describe 'Merchant Item Index Page' do
       end
 
       expect(page).to_not have_css("#item-#{@hippo.id}")
+    end
+
+    it "I see a button to de/activate the item next to each item that is de/active" do
+      visit login_path
+
+      fill_in 'Email', with: @user_2.email
+      fill_in 'Password', with: @user_2.password
+      click_button 'Login'
+
+      visit "/merchant/#{@brian.id}/items"
+
+      expect(@hippo.active).to eq(true)
+      expect(@demon.active).to eq(false)
+
+      within "#item-#{@hippo.id}" do
+        expect(page).to have_button("Deactivate")
+        click_button('Deactivate')
+      end
+
+      expect(@hippo.reload.active).to eq(false)
+      expect(current_path).to eq("/merchant/#{@brian.id}/items")
+      expect(page).to have_content("#{@hippo.name} is no longer for sale")
+
+      within "#item-#{@demon.id}" do
+        expect(page).to have_button("Activate")
+        click_button('Activate')
+      end
+      expect(@demon.reload.active).to eq(true)
+      expect(current_path).to eq("/merchant/#{@brian.id}/items")
+      expect(page).to have_content("#{@demon.name} is for sale")
     end
   end
 end
