@@ -25,6 +25,11 @@ class Order < ApplicationRecord
     order_items.where(item_id: item.id).sum(:quantity)
   end
 
+  def my_items(user)
+    binding.pry
+    items.where(items: {merchant_id: user.id})
+  end
+
   #
     # def pending?
   #   status == "pending"

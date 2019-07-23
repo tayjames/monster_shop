@@ -54,5 +54,9 @@ RSpec.describe Order do
       expect(@order_1.pending?).to eq(true)
       expect(@order_2.pending?).to eq(true)
     end
+
+    it '.my_items(user)' do
+      expect(@order_1.my_items(@megan)).to eq(@ogre)
+    end
   end
 end

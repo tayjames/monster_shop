@@ -3,9 +3,10 @@ class Merchant::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:order_id])
-    # binding.pry
-    user_id = @order.user_id
-    @user = User.find(user_id)
+    binding.pry
+    @items = @order.my_items(current_user)
+    # user_id = @order.user_id
+    @user = User.find("#{@order.user_id}")
   end
 
   private

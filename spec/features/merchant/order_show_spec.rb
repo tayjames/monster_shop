@@ -36,10 +36,10 @@ RSpec.describe 'merchant order show page' do
       expect(page).to have_content(@user.city)
       expect(page).to have_content(@user.state)
       expect(page).to have_content(@user.zip)
-      # save_and_open_page
+      save_and_open_page
       expect(page).to have_content("Item Name: #{@ogre.name}")
       expect(page).to_not have_content(@hippo.name)
-      # expect(page).to_not have_content(@giant.name)
+      expect(page).to_not have_content(@giant.name)
       expect(page).to have_css("img[src*='#{@ogre.image}']")
       expect(page).to have_content("Item Price: #{number_to_currency(@ogre.price)}")
       expect(page).to have_content(@order_1.quantity_of_item(@ogre))
