@@ -38,15 +38,15 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create', as: 'user_login'
   get '/logout', to: 'sessions#destroy'
 
-
-
   namespace :merchant do
     get '/dashboard', to: 'dashboard#index', as: 'dashboard'
     get '/', to: 'dashboard#show', as: 'dashboard_show'
+    get '/:id/items', to: 'items#index'
+    patch 'items/:id/activate', to: 'items#activate', as: 'activate'
+    patch 'items/:id/deactivate', to: 'items#deactivate', as: 'deactivate'
   end
 
   namespace :admin do
-    # get '/users', to: "dashboard#all", as: 'all_users'
     get '/users', to: "users#index", as: 'all_users'
     get '/users/:id', to: "users#show"
     get '/dashboard', to: 'dashboard#index', as: :dashboard
@@ -54,4 +54,5 @@ Rails.application.routes.draw do
     put '/merchants/:id', to: 'merchants#disable', as: :disable
     patch '/merchants/:id', to: 'merchants#enable', as: :enable
   end
+
 end
