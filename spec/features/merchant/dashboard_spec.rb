@@ -15,7 +15,7 @@ RSpec.describe "Merchant Dashboard/Profile Show Page" do
       @user = User.create!(email: "email@email.com", password: "password", name: "Mellie", address: "Streeterville", city: "Riot", state: "WA", zip: 98765)
       @order_1 = @user.orders.create
       @order_2 = @user.orders.create
-      @order_3 = @user.orders.create(name: 'Megan M', address: '123 Main St', city: 'Denver', state: 'IA', zip: 80218)
+      @order_3 = @user.orders.create
       @order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2)
       @order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 4)
       @order_1.order_items.create!(item: @hippo, price: @hippo.price, quantity: 3)
@@ -41,14 +41,14 @@ RSpec.describe "Merchant Dashboard/Profile Show Page" do
       expect(page).to_not have_button("Edit Profile")
     end
 
-    xit "I see a list of pending orders with items I sell" do
+    it "I see a list of pending orders with items I sell" do
       visit merchant_dashboard_path
 
       within "#id-#{@order_1.id}" do
         expect(page).to have_content("Order Number: #{@order_1.id}")
         expect(page).to have_content("Order Date: #{@order_1.created_at}")
-        expect(page).to have_content("Total Quantity of My Items: #{@order_1.merchant_item_quantity}")
-        expect(page).to have_content("Order Total of My Items: #{@order_1.merchant_item_total}")
+        expect(page).to have_content("Total Quantity of My Items: #{@megan.item_quantity(@order_1)}")
+        expect(page).to have_content("Order Total of My Items: #{number_to_currency(@megan.item_total(@order_1))}")
       end
 
       within "#id-#{@order_1.id}" do
