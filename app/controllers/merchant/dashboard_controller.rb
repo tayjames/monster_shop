@@ -2,14 +2,9 @@ class Merchant::DashboardController < ApplicationController
   before_action :require_merchant, :find_merchant
 
   def index
-    binding.pry
-    @pending_orders = @merchant.all_order.find_all do |order|
+    @pending_orders = @merchant.all_orders.find_all do |order|
       order.pending?
     end
-    # all_orders = order_ids.map do |id|
-    #   id = Order.find(id)
-    # end
-    # @orders = all_orders.uniq
   end
 
   def show

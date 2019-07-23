@@ -33,7 +33,7 @@ RSpec.describe Order do
       @order_2.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2)
     end
 
-    it '.grand_total' do
+    it ".grand_total" do
       expect(@order_1.grand_total).to eq(190.5)
       expect(@order_2.grand_total).to eq(140.5)
     end
@@ -56,11 +56,11 @@ RSpec.describe Order do
     end
 
     it '.merchant_item_quantity(merchant)' do
+      expect(@megan.item_quantity(@order_1)).to eq(76)
       expect(@order_1.merchant_item_quantity(@megan)).to eq(2)
-      expect(@order_1.merchant_item_quantity(@brian)).to eq(3)
+      expect(@order_1.merchant_item_quantity(@brian)).to eq(1)
+      expect(@order_2.merchant_item_quantity(@megan)).to eq(4)
+      expect(@order_2.merchant_item_quantity(@brian)).to eq(1)
     end
-
-    it '.merchant_item_total' do
-    end 
   end
 end

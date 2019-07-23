@@ -28,8 +28,8 @@ RSpec.describe Merchant do
       @order_2 = @user_1.orders.create!(name: 'Megan M', address: '123 Main St', city: 'Denver', state: 'IA', zip: 80218)
       @order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2)
       @order_1.order_items.create!(item: @hippo, price: @hippo.price, quantity: 3)
-      @order_2.order_items.create!(item: @giant, price: @hippo.price, quantity: 2)
-      @order_2.order_items.create!(item: @ogre, price: @hippo.price, quantity: 2)
+      @order_2.order_items.create!(item: @giant, price: @giant.price, quantity: 2)
+      @order_2.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2)
 
       @user_1.orders << @order_1
 
@@ -52,6 +52,11 @@ RSpec.describe Merchant do
 
     it '.total_items' do
       expect(@megan.total_items(@order_1)).to eq(5)
+    end
+
+    it '.item_quantity(order)' do
+      expect(@megan.item_quantity(@order_1)).to eq(2)
+      expect(@brian.item_quantity(@order_1)).to eq(3)
     end
   end
 end

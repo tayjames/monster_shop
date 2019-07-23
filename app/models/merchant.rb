@@ -31,4 +31,12 @@ class Merchant < ApplicationRecord
   def all_orders
     items.joins(:order_items).distinct.pluck(:order_id)
   end
+
+  def item_quantity(order)
+    # binding.pry
+    # self.items.joins(:orders).select("SUM(order_items.quantity) AS item_total").group("order_items.order_id").where("order_items.order_id = #{order.id}")
+    # i.first.item_total
+    # self.items.joins(:orders).select("SUM(order_items.quantity) AS item_total").where("order_items.order_id = #{order.id}").group("order_items.order_id").first.item_total
+    self.items.joins(:orders).select("SUM(order_items.quantity) AS item_total").group("order_items.order_id").where("order_items.order_id = #{order.id}").sum(:quantity)[order.id]
+  end
 end
