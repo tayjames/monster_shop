@@ -13,9 +13,9 @@ RSpec.describe "Merchant Dashboard/Profile Show Page" do
       @giant_2 = @megan.items.create!(name: 'Bryan the Giant', description: "I'm a named Giant!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 30 )
       @emily = @megan.users.create!(name: "Emily", role: 2, email: "mm@email.com", password: "password", address: "Street", city: "City", state: "ST", zip: 87654)
       @user = User.create!(email: "email@email.com", password: "password", name: "Mellie", address: "Streeterville", city: "Riot", state: "WA", zip: 98765)
-      @order_1 = @user.orders.create!
-      @order_2 = @user.orders.create!
-      @order_3 = @user.orders.create!
+      @order_1 = @user.orders.create
+      @order_2 = @user.orders.create
+      @order_3 = @user.orders.create(name: 'Megan M', address: '123 Main St', city: 'Denver', state: 'IA', zip: 80218)
       @order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2)
       @order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 4)
       @order_1.order_items.create!(item: @hippo, price: @hippo.price, quantity: 3)
@@ -56,11 +56,5 @@ RSpec.describe "Merchant Dashboard/Profile Show Page" do
         expect(current_path).to eq(merchant_orders_show_path(@order_1))
       end
     end
-
-#     As a merchant
-# When I visit my merchant dashboard
-# I see a link to view my own items
-# When I click that link
-# My URI route should be "/merchant/items"
   end
 end

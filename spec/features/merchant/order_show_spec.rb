@@ -13,9 +13,9 @@ RSpec.describe 'merchant order show page' do
       @giant_2 = @megan.items.create!(name: 'Bryan the Giant', description: "I'm a named Giant!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 30 )
       @emily = @megan.users.create!(name: "Emily", role: 2, email: "mm@email.com", password: "password", address: "Street", city: "City", state: "ST", zip: 87654)
       @user = User.create!(email: "email@email.com", password: "password", name: "Mellie", address: "Streeterville", city: "Riot", state: "WA", zip: 98765)
-      @order_1 = @user.orders.create!(name: "Mellie", address: "Streeterville", city: "Riot", state: "WA", zip: 98765)
-      @order_2 = @user.orders.create!(name: "Mellie", address: "Streeterville", city: "Riot", state: "WA", zip: 98765)
-      @order_3 = @user.orders.create!(name: "Mellie", address: "Streeterville", city: "Riot", state: "WA", zip: 98765)
+      @order_1 = @user.orders.create!
+      @order_2 = @user.orders.create!
+      @order_3 = @user.orders.create!
       @order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2)
       @order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 4)
       @order_1.order_items.create!(item: @hippo, price: @hippo.price, quantity: 3)
@@ -36,7 +36,7 @@ RSpec.describe 'merchant order show page' do
       expect(page).to have_content(@user.city)
       expect(page).to have_content(@user.state)
       expect(page).to have_content(@user.zip)
-      save_and_open_page
+
       expect(page).to have_content("Item Name: #{@ogre.name}")
       expect(page).to_not have_content(@hippo.name)
       expect(page).to_not have_content(@giant.name)
