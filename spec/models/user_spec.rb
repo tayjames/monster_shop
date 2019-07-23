@@ -20,7 +20,7 @@ RSpec.describe User, type: :model do
   describe "Instance Methods" do
     it "#orders?" do
       user_1 = User.create!(email: "789@gmail.com", password: "password", name: "PapRica Jones", address: "456 Main St.", city: "Denver", state: "CO", zip: 80220, role: 1)
-      user_1.orders.create!(name: "PapRica Jones", address: "456 Main St.", city: "Denver", state: "CO", zip: 80220)
+      user_1.orders.create!
 
       expect(user_1.orders?).to eq(false)
     end

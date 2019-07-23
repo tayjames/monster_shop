@@ -19,14 +19,18 @@ class Merchant < ApplicationRecord
 
   def distinct_cities
     order_items.joins('JOIN orders ON order_items.order_id = orders.id')
+               .joins('JOIN users ON orders.user_id = users.id')
                .order('city_state')
                .distinct
-               .pluck("CONCAT_WS(', ', orders.city, orders.state) AS city_state")
+               .pluck("CONCAT_WS(', ', users.city, users.state) AS city_state")
   end
 
-  def total_items(order)
-    items.joins(:order_items).select(:item).where("order_items.order_id = #{order.id}, status").sum(:quantity)
-  end
+  # def total_items(order)
+  #   items.joins(:order_items)
+  #        .select(:item)
+  #        .where("order_items.order_id = #{order.id}")
+  #        .sum(:quantity)
+  # end
 
   def all_orders
     items.joins(:order_items).distinct.pluck(:order_id)

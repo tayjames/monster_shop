@@ -12,8 +12,8 @@ RSpec.describe 'Merchant Show Page' do
 
       @user_1 = User.create!(email: "123@gmail.com", password: "password", name: "Paul", address: "456 Main St.", city: "Denver", state: "CO", zip: 80220, role: 1)
 
-      @order_1 = @user_1.orders.create!(name: 'Megan M', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
-      @order_2 = @user_1.orders.create!(name: 'Megan M', address: '123 Main St', city: 'Denver', state: 'IA', zip: 80218)
+      @order_1 = @user_1.orders.create!
+      @order_2 = @user_1.orders.create!
       @order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2)
       @order_2.order_items.create!(item: @giant, price: @hippo.price, quantity: 2)
       @order_2.order_items.create!(item: @ogre, price: @hippo.price, quantity: 2)
@@ -44,7 +44,7 @@ RSpec.describe 'Merchant Show Page' do
       within '.statistics' do
         expect(page).to have_content("Item Count: #{@megan.item_count}")
         expect(page).to have_content("Average Item Price: #{number_to_currency(@megan.average_item_price)}")
-        expect(page).to have_content("Cities Served:\nDenver, CO\nDenver, IA")
+        expect(page).to have_content("Cities Served:\nDenver, CO")
       end
     end
 

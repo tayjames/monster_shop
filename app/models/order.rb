@@ -5,12 +5,7 @@ class Order < ApplicationRecord
 
   belongs_to :user
 
-  validates_presence_of :name,
-                        :address,
-                        :city,
-                        :state,
-                        :zip,
-                        :status
+  validates_presence_of :status
   enum status: ["pending", "packaged", "shipped", "cancelled"]
 
   def grand_total
