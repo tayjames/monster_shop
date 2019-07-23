@@ -1,0 +1,12 @@
+<h1>Pending Orders</h1>
+
+<% @pending_orders.each do |order| %>
+  <section id="id-<%= order.id %>">
+  <h4>Order Number: <%= link_to "#{order.id}", merchant_orders_show_path(order) %></h4>
+  <p>Order Date: <%= order.created_at %></p>
+  <p>Total Quantity of My Items: <%= @merchant.item_quantity(order) %></p>
+  <p>Order Total of My Items: <%= number_to_currency(@merchant.item_total(order)) %></p>
+<% end %>
+</section>
+
+<%= link_to "My Items", merchant_items_index_path %>
