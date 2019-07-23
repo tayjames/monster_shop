@@ -24,10 +24,6 @@ class Merchant < ApplicationRecord
                .pluck("CONCAT_WS(', ', orders.city, orders.state) AS city_state")
   end
 
-  def total_items(order)
-    items.joins(:order_items).select(:item).where("order_items.order_id = #{order.id}, status").sum(:quantity)
-  end
-
   def all_orders
     items.joins(:order_items).distinct.pluck(:order_id)
   end
