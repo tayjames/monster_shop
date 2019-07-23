@@ -2,6 +2,7 @@ class Merchant::DashboardController < ApplicationController
   before_action :require_merchant, :find_merchant
 
   def index
+    binding.pry
     @pending_orders = @merchant.all_orders.find_all do |order|
       order.pending?
     end

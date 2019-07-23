@@ -47,7 +47,7 @@ RSpec.describe "Merchant Dashboard/Profile Show Page" do
       within "#id-#{@order_1.id}" do
         expect(page).to have_content("Order Number: #{@order_1.id}")
         expect(page).to have_content("Order Date: #{@order_1.created_at}")
-        # expect(page).to have_content("Total Quantity of My Items: #{@order_1.merchant_item_quantity}")
+        expect(page).to have_content("Total Quantity of My Items: #{@megan.item_quantity(@order_1)}")
         # expect(page).to have_content("Order Total of My Items: #{@order_1.merchant_item_total}")
       end
 

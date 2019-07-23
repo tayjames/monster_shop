@@ -54,13 +54,5 @@ RSpec.describe Order do
       expect(@order_1.pending?).to eq(true)
       expect(@order_2.pending?).to eq(true)
     end
-
-    it '.merchant_item_quantity(merchant)' do
-      expect(@megan.item_quantity(@order_1)).to eq(76)
-      expect(@order_1.merchant_item_quantity(@megan)).to eq(2)
-      expect(@order_1.merchant_item_quantity(@brian)).to eq(1)
-      expect(@order_2.merchant_item_quantity(@megan)).to eq(4)
-      expect(@order_2.merchant_item_quantity(@brian)).to eq(1)
-    end
   end
 end
