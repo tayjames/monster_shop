@@ -21,8 +21,8 @@ class Order < ApplicationRecord
   end
 
   def my_items(user)
-    binding.pry
-    items.where(items: {merchant_id: user.id})
+    # binding.pry
+    items.where("items.merchant_id = #{user.id}")
   end
 
   #
