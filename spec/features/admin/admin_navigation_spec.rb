@@ -25,14 +25,3 @@ describe "User visits categories index page" do
     end
   end
 end
-
-# As an admin user
-# I see the same links as a visitor
-# Plus the following links
-# - a link to my admin dashboard ("/admin")
-# - a link to log out ("/logout")
-# - a link to see all users ("/admin/users")
-#
-# Minus the following links/info:
-# - I do not see a link to log in or register
-# - a link to my shopping cart ("/cart") or count of cart items

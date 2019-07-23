@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :merchants do
-    resources :items, only: [:index, :new, :create]
+    resources :items, only: [:new, :index, :create]
   end
 
   resources :items, only: [:index, :show, :edit, :update, :destroy] do
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new]
 
   get '/register', to: 'users#register'
-  get '/profile', to: 'users#show'
+  get '/profile', to: 'users#show', as: 'profile'
   post '/profile', to: 'users#create'
   get '/profile/edit', to: 'users#edit', as: 'edit_profile'
   get '/profile/edit_password', to: 'users#edit_password', as: 'edit_password'
@@ -44,6 +44,8 @@ Rails.application.routes.draw do
     get '/:id/items', to: 'items#index'
     patch 'items/:id/activate', to: 'items#activate', as: 'activate'
     patch 'items/:id/deactivate', to: 'items#deactivate', as: 'deactivate'
+    get '/orders/:order_id', to: 'orders#show', as: 'orders_show'
+    get '/items', to: 'items#index', as: 'items_index'
   end
 
   namespace :admin do
@@ -54,5 +56,4 @@ Rails.application.routes.draw do
     put '/merchants/:id', to: 'merchants#disable', as: :disable
     patch '/merchants/:id', to: 'merchants#enable', as: :enable
   end
-
 end

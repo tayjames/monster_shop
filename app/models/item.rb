@@ -19,14 +19,18 @@ class Item < ApplicationRecord
   end
 
   def self.enabled_items
-    Item.where(active: true)
+    where(active: true)
   end
 
   def self.top_five
-    Item.joins(:order_items).select('items.*, sum(order_items.quantity) as total_quantity').group(:id).order('total_quantity desc').limit(5)
+    joins(:order_items).select('items.*, sum(order_items.quantity) as total_quantity').group(:id).order('total_quantity desc').limit(5)
   end
 
   def self.bottom_five
-    Item.joins(:order_items).select('items.*, sum(order_items.quantity) as total_quantity').group(:id).order('total_quantity').limit(5)
+    joins(:order_items).select('items.*, sum(order_items.quantity) as total_quantity').group(:id).order('total_quantity').limit(5)
+  end
+
+  def any_orders?
+    order_items.empty?
   end
 end

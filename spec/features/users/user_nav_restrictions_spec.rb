@@ -22,8 +22,3 @@ describe "User Navigation Restrictions" do
     end
   end
 end
-
-# As a User
-# When I try to access any path that begins with the following, then I see a 404 error:
-# - '/merchant'
-# - '/admin'
