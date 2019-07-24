@@ -20,7 +20,7 @@ RSpec.describe 'admin dashboard index' do
       @order_1.order_items.create!(item: @hippo, price: @hippo.price, quantity: 3)
       @order_2.order_items.create!(item: @giant, price: @giant.price, quantity: 2)
       @order_2.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2)
-      # binding.pry
+
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@emily)
     end
 
@@ -32,14 +32,18 @@ RSpec.describe 'admin dashboard index' do
           expect(page).to have_content(@user.name)
           expect(page).to have_content(@order_1.id)
           expect(page).to have_content(@order_1.created_at)
+          click_link "#{@user.name}"
+          expect(current_path).to eq(admin_path(@user))
         end
+        # save_and_open_page
+        # within ".sorted_orders" do
+        #   expect(page.all('li')[0]).to have_content(@order_1)
+        #   expect(page.all('li')[1]).to have_content(@order_0)
+        #   expect(page.all('li')[2]).to have_content(@order_2)
+        #   expect(page.all('li')[3]).to have_content(@order_3)
+        # end
 
-        within ".sorted_orders" do
-          expect(page.all('li')[0]).to have_content(@order_1)
-          expect(page.all('li')[1]).to have_content(@order_0)
-          expect(page.all('li')[2]).to have_content(@order_2)
-          expect(page.all('li')[3]).to have_content(@order_3)
-        end
+
       end
     end
   end

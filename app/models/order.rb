@@ -24,8 +24,7 @@ class Order < ApplicationRecord
     items.where("items.merchant_id = #{merchant.id}").distinct
   end
 
-  #
-    # def pending?
-  #   status == "pending"
-  # end
+  def self.sorted_orders
+    order(:status)
+  end
 end
