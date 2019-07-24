@@ -7,6 +7,15 @@ class Merchant::OrdersController < ApplicationController
     @user = User.find("#{@order.user_id}")
   end
 
+  def update
+    @order_item = OrderItem.find(params[:order_items_id])
+    @item = Item.find(@order_item.item_id)
+    @item.update(inventory: @item.inventory - @order_item.quantity)
+    @order_item.update(status: 1)
+    flash[:notice] = "Order for #{@item.name} has been fulfilled."
+    redirect_to merchant_orders_show_path(@order_item.order_id)
+  end
+
   private
 
   def get_merchant

@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20190719223922) do
     t.string "description"
     t.float "price"
     t.integer "inventory"
-    t.string "image", default: "https://i.ya-webdesign.com/images/giants-drawing-ogre-12.png"
+    t.string "image"
     t.boolean "active", default: true
     t.bigint "merchant_id"
     t.datetime "created_at", null: false
