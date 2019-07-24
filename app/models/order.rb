@@ -23,9 +23,4 @@ class Order < ApplicationRecord
   def my_items(merchant)
     items.where("items.merchant_id = #{merchant.id}").distinct
   end
-
-  #
-    # def pending?
-  #   status == "pending"
-  # end
 end
