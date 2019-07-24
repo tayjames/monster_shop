@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :merchants do
-    resources :items, only: [:new, :index, :create]
+    resources :items, only: :index
   end
 
   resources :items, only: [:index, :show, :edit, :update, :destroy] do
@@ -46,6 +46,9 @@ Rails.application.routes.draw do
     patch 'items/:id/deactivate', to: 'items#deactivate', as: 'deactivate'
     get '/orders/:order_id', to: 'orders#show', as: 'orders_show'
     get '/items', to: 'items#index', as: 'items_index'
+    get '/items/new', to: 'items#new'
+    post '/items', to: 'items#create'
+    delete 'items/:id', to: 'items#destroy', as: 'item_delete'
   end
 
   namespace :admin do

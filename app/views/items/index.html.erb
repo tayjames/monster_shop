@@ -1,6 +1,5 @@
 <% if @merchant %>
   <h1>All Items From <%= link_to @merchant.name, "/merchants/#{@merchant.id}" %></h1>
-  <%= link_to 'New Item', "/merchants/#{@merchant.id}/items/new" %>
 <% else %>
   <h1>All Items</h1>
 <% end %>
@@ -15,9 +14,6 @@
     <p>Price: <%= number_to_currency(item.price) %></p>
     <p>Sold by: <%= link_to item.merchant.name, "/merchants/#{item.merchant_id}" %>, Inventory: <%= item.inventory %></p>
     <p><%= item.active ? "Active" : "Inactive" %></p>
-    <% if current_merchant_user? && item.any_orders? %>
-    <p><%= button_to "Delete", item_path(item), method: :delete %><p>
-    <% end %>
   </section>
 <% end %>
 
