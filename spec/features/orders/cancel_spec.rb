@@ -30,7 +30,7 @@ RSpec.describe 'As a registered user' do
           visit profile_order_path(@order_1)
           expect(page).to have_button('Cancel Order')
 
-          @order_1.update(status: 1)
+          @order_1.update(status: 0)
           visit profile_order_path(@order_1)
           expect(page).to_not have_button('Cancel Order')
 
@@ -63,11 +63,11 @@ RSpec.describe 'As a registered user' do
           @hippo.update(inventory: 6)
 
 
-          @order_1.update(status: 0)
+          @order_1.update(status: 1)
           visit profile_order_path(@order_1)
 
-          @order_item_1.update(status: 1)
-          @order_item_2.update(status: 1)
+          @order_item_1.update(status: 0)
+          @order_item_2.update(status: 0)
 
           click_on 'Cancel Order'
 

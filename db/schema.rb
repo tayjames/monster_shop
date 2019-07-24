@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20190719223922) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "status", default: 0
+    t.integer "status", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
