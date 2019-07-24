@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 
   def generate_flash(resource)
     resource.errors.messages.each do |validation, message|
-      flash[validation] = "#{validation}: #{message}"
+      flash[validation] = "#{validation.capitalize}: #{message.join}"
     end
   end
 

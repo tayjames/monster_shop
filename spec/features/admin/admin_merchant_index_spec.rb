@@ -22,7 +22,7 @@ RSpec.describe "Admin Merchant Index Page" do
       fill_in 'Password', with: @user_1.password
       click_button 'Login'
 
-      visit '/merchants'
+      visit admin_merchants_path
 
       expect(page).to have_content(@megan.city)
       expect(page).to have_content(@megan.state)
@@ -35,7 +35,7 @@ RSpec.describe "Admin Merchant Index Page" do
       fill_in 'Password', with: @user_1.password
       click_button 'Login'
 
-      visit '/merchants'
+      visit admin_merchants_path
 
       expect(@megan.enabled).to eq(false)
       expect(@giant.active).to eq(false)
@@ -59,7 +59,7 @@ RSpec.describe "Admin Merchant Index Page" do
       fill_in 'Email', with: @user_2.email
       fill_in 'Password', with: @user_2.password
       click_button 'Login'
-      visit '/merchants'
+      visit admin_merchants_path
 
       expect(@brian.enabled).to eq(true)
       expect(@hippo.active).to eq(true)

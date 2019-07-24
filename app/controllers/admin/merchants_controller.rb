@@ -4,6 +4,10 @@ class Admin::MerchantsController < Admin::BaseController
     @merchant = Merchant.find(params[:id])
   end
 
+  def index
+    @merchants = Merchant.all
+  end
+
   def enable
     @merchant = Merchant.find(params[:id])
     @merchant.update(enabled: true)

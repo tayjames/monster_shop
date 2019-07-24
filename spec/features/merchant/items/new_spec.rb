@@ -41,7 +41,7 @@ RSpec.describe 'Merchant adds an Item' do
         expect(page).to have_content("Active")
       end
 
-      it 'I can not create an  item for a merchant with an incomplete form' do
+      it 'I can not create an item for a merchant with an incomplete form' do
         name = 'Ogre'
 
         visit merchant_items_new_path
@@ -49,9 +49,9 @@ RSpec.describe 'Merchant adds an Item' do
         fill_in 'Name', with: name
         click_button 'Create Item'
 
-        expect(page).to have_content("description: [\"can't be blank\"]")
-        expect(page).to have_content("price: [\"can't be blank\"]")
-        expect(page).to have_content("inventory: [\"can't be blank\"]")
+        expect(page).to have_content("Description: can't be blank")
+        expect(page).to have_content("Price: can't be blank")
+        expect(page).to have_content("Inventory: can't be blank")
         expect(page).to have_button('Create Item')
       end
 
@@ -69,7 +69,7 @@ RSpec.describe 'Merchant adds an Item' do
         fill_in 'Inventory', with: inventory
         click_button 'Create Item'
 
-        
+
         expect(current_path).to eq(merchant_items_index_path)
         expect(page).to have_link(name)
         expect(page).to have_content(description)

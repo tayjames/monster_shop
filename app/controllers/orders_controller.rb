@@ -10,11 +10,6 @@ class OrdersController < ApplicationController
   end
 
   def create
-    if current_user == nil
-      link = "<a href=\"#{url_for(register_path)}\">Register</a>"
-      flash[:error] = "You must #{link} to finish checkout"
-      redirect_to cart_path
-    end
     order = current_user.orders.new
     if order.save
       cart.items.each do |item|

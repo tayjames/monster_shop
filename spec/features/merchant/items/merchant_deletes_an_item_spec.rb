@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Merchant Navigation Restrictions" do
+describe "Merchant deletes an item" do
   context "as a merchant" do
     before :each do
       @megan = Merchant.create!(name: 'Megans Marmalades', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
