@@ -1,7 +1,7 @@
 <%= link_to 'New Item', merchant_items_new_path %>
 
 <% @items.each do |item| %>
-  <section id='item-<%= item.id%>'>
+  <section id="item-<%= item.id %>">
     <h2><%= link_to item.name, "/items/#{item.id}" %></h2>
     <p><%= item.description %></p>
     <%= link_to item_path(item) do %>
@@ -17,5 +17,6 @@
     <% if item.orders.empty? %>
       <%= button_to "Delete", merchant_item_delete_path(item), method: :delete %>
     <% end %>
+    <%= button_to "Edit Item", merchant_items_edit_path(item), method: :get %>
   </section>
 <% end %>
