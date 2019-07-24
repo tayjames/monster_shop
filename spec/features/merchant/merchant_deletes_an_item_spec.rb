@@ -18,44 +18,27 @@ describe "Merchant Navigation Restrictions" do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user_1)
     end
     it "I do not have access to the following three paths" do
+      visit merchant_items_index_path
 
-    visit merchant_items_path(@user_1.merchant_id)
+      within "#item-#{@giant.id}" do
+        expect(page).to have_button("Delete")
+      end
 
-    within "#item-#{@giant.id}" do
-      expect(page).to have_button("Delete")
+      within "#item-#{@ogre.id}" do
+        expect(page).to have_button("Delete")
+
+        click_on "Delete"
+      end
+
+      expect(current_path).to eq(merchant_items_index_path)
+
+      within "#item-#{@hippo.id}" do
+        expect(page).to_not have_button("Delete")
+      end
+
+      expect(page).to have_content("Ogre has been deleted!")
+
+      # expect(page).to_not have_content("I'm an Ogre!")
     end
-
-    within "#item-#{@ogre.id}" do
-      expect(page).to have_button("Delete")
-      click_on "Delete"
-
-      expect(current_path).to eq("/items")
-    end
-
-
-    within "#item-#{@hippo.id}" do
-      expect(page).to_not have_button("Delete")
-    end
-
-    expect(page).to have_content("Ogre has been deleted!")
-
-
-    expect(page).to_not have_content("I'm an Ogre!")
-
-
-
-    end
-
   end
-
 end
-
-
-
-# As a merchant
-# When I visit my items page
-# I see a button or link to delete the item next to each item that has never been ordered
-# When I click on the "delete" button or link for an item
-# I am returned to my items page
-# I see a flash message indicating this item is now deleted
-# I no longer see this item on the page
