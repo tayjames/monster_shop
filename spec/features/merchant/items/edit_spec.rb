@@ -21,6 +21,7 @@ RSpec.describe "Merchant Item Edit Page" do
         click_button "Edit Item"
         expect(current_path).to eq(merchant_items_edit_path(@ogre))
       end
+
       visit merchant_items_index_path
 
       within "#item-#{@giant.id}" do
@@ -33,14 +34,22 @@ RSpec.describe "Merchant Item Edit Page" do
       expect(current_path).to eq(merchant_items_index_path)
       expect(page).to have_content("#{@giant.name} has been updated!")
       expect(@giant.reload.description).to eq("totes tubular and terrific")
+
+      visit merchant_items_index_path
+
+      within "#item-#{@giant.id}" do
+        click_button "Edit Item"
+      end
+
+      fill_in "Name", with: ""
+      fill_in "Description", with: ""
+      fill_in "Price", with: "-6"
+      fill_in "Inventory", with: "-1"
+
+      click_button "Update"
+
+      expect(page).to have_content("Name can't be blank and Description can't be blank")
+      expect(page).to_not have_content("#{@giant.name} has been updated!")
     end
   end
 end
-
-# I can change any information, but all of the rules for adding a new item still apply:
-# - name and description cannot be blank
-# - price cannot be less than $0.00
-# - inventory must be 0 or greater
-
-# I see the item's new information on the page, and it maintains its previous enabled/disabled state
-# If I left the image field blank, I see a placeholder image for the thumbnail

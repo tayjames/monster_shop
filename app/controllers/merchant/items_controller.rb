@@ -16,9 +16,13 @@ class Merchant::ItemsController < ApplicationController
   def update
     @merchant = current_user.merchant
     @item = Item.find(params[:id])
-    @item.update(item_params)
-    redirect_to merchant_items_index_path
-    flash[:success] = "#{@item.name} has been updated!"
+    if @item.update(item_params)
+      redirect_to merchant_items_index_path
+      flash[:success] = "#{@item.name} has been updated!"
+    else
+      flash[:notice] = @item.errors.full_messages.to_sentence
+      render :edit
+    end
   end
 
   def create
