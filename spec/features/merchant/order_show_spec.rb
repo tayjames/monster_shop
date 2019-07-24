@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Merchant Dashboard/Profile Show Page" do
+RSpec.describe 'merchant order show page' do
   describe 'as a merchant' do
     before :each do
       @megan = Merchant.create!(name: 'Megans Marmalades', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
@@ -13,9 +13,9 @@ RSpec.describe "Merchant Dashboard/Profile Show Page" do
       @giant_2 = @megan.items.create!(name: 'Bryan the Giant', description: "I'm a named Giant!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 30 )
       @emily = @megan.users.create!(name: "Emily", role: 2, email: "mm@email.com", password: "password", address: "Street", city: "City", state: "ST", zip: 87654)
       @user = User.create!(email: "email@email.com", password: "password", name: "Mellie", address: "Streeterville", city: "Riot", state: "WA", zip: 98765)
-      @order_1 = @user.orders.create
-      @order_2 = @user.orders.create
-      @order_3 = @user.orders.create
+      @order_1 = @user.orders.create!
+      @order_2 = @user.orders.create!
+      @order_3 = @user.orders.create!
       @order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2)
       @order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 4)
       @order_1.order_items.create!(item: @hippo, price: @hippo.price, quantity: 3)
@@ -28,33 +28,24 @@ RSpec.describe "Merchant Dashboard/Profile Show Page" do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@emily)
     end
 
-    it "I see my profile details, but cannot edit them" do
-      visit merchant_dashboard_show_path
+    it "shows all of the order and user information" do
+      visit merchant_orders_show_path(@order_1)
 
-      expect(page).to have_content("Name: #{@megan.name}")
-      expect(page).to have_content("Street Address: #{@megan.address}")
-      expect(page).to have_content("City: #{@megan.city}")
-      expect(page).to have_content("State: #{@megan.state}")
-      expect(page).to have_content("Zip: #{@megan.zip}")
+      expect(page).to have_content(@user.name)
+      expect(page).to have_content(@user.address)
+      expect(page).to have_content(@user.city)
+      expect(page).to have_content(@user.state)
+      expect(page).to have_content(@user.zip)
 
-      expect(page).to_not have_link("Edit Profile")
-      expect(page).to_not have_button("Edit Profile")
-    end
+      expect(page).to have_content("Item Name: #{@ogre.name}")
+      expect(page).to_not have_content(@hippo.name)
+      expect(page).to_not have_content(@giant.name)
+      expect(page).to have_css("img[src*='#{@ogre.image}']")
+      expect(page).to have_content("Item Price: #{number_to_currency(@ogre.price)}")
+      expect(page).to have_content(@order_1.quantity_of_item(@ogre))
 
-    it "I see a list of pending orders with items I sell" do
-      visit merchant_dashboard_path
-
-      within "#id-#{@order_1.id}" do
-        expect(page).to have_content("Order Number: #{@order_1.id}")
-        expect(page).to have_content("Order Date: #{@order_1.created_at}")
-        expect(page).to have_content("Total Quantity of My Items: #{@megan.item_quantity(@order_1)}")
-        expect(page).to have_content("Order Total of My Items: #{number_to_currency(@megan.item_total(@order_1))}")
-      end
-
-      within "#id-#{@order_1.id}" do
-        click_link "#{@order_1.id}"
-        expect(current_path).to eq(merchant_orders_show_path(@order_1))
-      end
+      click_link "#{@ogre.name}"
+      expect(current_path).to eq(item_path(@ogre))
     end
   end
 end

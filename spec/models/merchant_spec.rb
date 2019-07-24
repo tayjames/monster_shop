@@ -50,10 +50,6 @@ RSpec.describe Merchant do
       expect(@megan.distinct_cities).to eq(['Denver, CO', 'LA, CA'])
     end
 
-    # it '.total_items' do
-    #   expect(@megan.total_items(@order_1)).to eq(2)
-    # end
-
     it '.item_quantity(order)' do
       expect(@megan.item_quantity(@order_1)).to eq(2)
       expect(@brian.item_quantity(@order_1)).to eq(3)
@@ -61,6 +57,10 @@ RSpec.describe Merchant do
 
     it '.item_total(order)' do
       expect(@megan.item_total(@order_1)).to eq(20.25)
+    end
+
+    it '.all_orders' do
+      expect(@megan.all_orders).to eq([@order_1.id, @order_2.id])
     end
   end
 end
