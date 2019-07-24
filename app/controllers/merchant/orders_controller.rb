@@ -5,6 +5,10 @@ class Merchant::OrdersController < ApplicationController
     @order = Order.find(params[:order_id])
     @items = @order.my_items(@merchant)
     @user = User.find("#{@order.user_id}")
+    # binding.pry
+    if @order.order_items.all? { |order_item| order_item.status == "fulfilled" }
+      @order.update(status: 1)
+    end
   end
 
   def update
