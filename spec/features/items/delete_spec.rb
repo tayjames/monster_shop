@@ -37,7 +37,7 @@ RSpec.describe 'Delete Item' do
 
       describe 'If an item has orders' do
         it 'I can not see a delete button for items with orders' do
-          order_1 = @user_1.orders.create!(name: 'Megan M', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
+          order_1 = @user_1.orders.create
           order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2)
 
           visit "/items/#{@ogre.id}"
@@ -46,7 +46,7 @@ RSpec.describe 'Delete Item' do
         end
 
         it 'I can not delete an item with orders through a direct request' do
-          order_1 = @user_1.orders.create!(name: 'Megan M', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
+          order_1 = @user_1.orders.create!
           order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2)
 
           page.driver.submit :delete, item_path(@ogre), {}
