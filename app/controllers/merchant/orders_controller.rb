@@ -7,7 +7,7 @@ class Merchant::OrdersController < ApplicationController
     @user = User.find("#{@order.user_id}")
     # binding.pry
     if @order.order_items.all? { |order_item| order_item.status == "fulfilled" }
-      @order.update(status: 1)
+      @order.update(status: 0)
     end
   end
 
