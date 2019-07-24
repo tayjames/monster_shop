@@ -22,7 +22,7 @@ RSpec.describe Order do
       @user_1 = User.create!(email: "123@gmail.com", password: "password", name: "PapRica Jones", address: "456 Main St.", city: "Denver", state: "CO", zip: 80220, role: 1)
       @order_1 = @user_1.orders.create!
       @order_2 = @user_1.orders.create!
-      @order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2)
+      @order_item = @order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2)
       @order_1.order_items.create!(item: @hippo, price: @hippo.price, quantity: 3)
       @order_2.order_items.create!(item: @giant, price: @giant.price, quantity: 2)
       @order_2.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2)
@@ -53,5 +53,10 @@ RSpec.describe Order do
     it '.my_items(user)' do
       expect(@order_1.my_items(@megan)).to eq([@ogre])
     end
+
+    it '.find_order_item(item, order)' do
+      expect(@order_1.find_order_item(@ogre, @order_1)).to eq(@order_item)
+    end
+
   end
 end
