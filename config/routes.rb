@@ -45,6 +45,7 @@ Rails.application.routes.draw do
     patch 'items/:id/activate', to: 'items#activate', as: 'activate'
     patch 'items/:id/deactivate', to: 'items#deactivate', as: 'deactivate'
     get '/orders/:order_id', to: 'orders#show', as: 'orders_show'
+    patch '/orders/:order_items_id', to: 'orders#update', as: 'item_fulfill'
     get '/items', to: 'items#index', as: 'items_index'
     get '/items/new', to: 'items#new'
     get '/items/:id/edit', to: 'items#edit', as: 'items_edit'

@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
           quantity: cart.count_of(item.id),
           price: item.price
           })
-        item.update(inventory: item.inventory - cart.count_of(item.id))
+        # item.update(inventory: item.inventory - cart.count_of(item.id))
       end
       session.delete(:cart)
       redirect_to profile_orders_path

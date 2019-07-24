@@ -39,6 +39,18 @@ RSpec.describe Item do
       expect(@ogre.average_rating.round(2)).to eq(3.00)
     end
 
+    it '.enough?' do
+      @hippo = @megan.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 10 )
+      @user_1 = @megan.users.create!(email: "13@gmail.com", password: "password", name: "PapRica Jones", address: "456 Main St.", city: "Denver", state: "CO", zip: 80220, role: 2)
+      @user_2 = @megan.users.create!(email: "123@gmail.com", password: "password", name: "PapRica Jones", address: "456 Main St.", city: "Denver", state: "CO", zip: 80220, role: 2)
+      @order_1 = @user_1.orders.create!
+      @order_item_1 = @order_1.order_items.create!(item: @hippo, quantity: 4, price: @hippo.price)
+      @order_item_2 = @order_1.order_items.create!(item: @ogre, quantity: 11, price: @ogre.price)
+
+      expect(@hippo.enough?(@order_item_1)).to eq(true)
+      expect(@ogre.enough?(@order_item_2)).to eq(false)
+    end
+
   describe 'Class Methods' do
     it '#enabled_items' do
       expect(Item.enabled_items).to_not eq([@ogre_2, @giant_2])

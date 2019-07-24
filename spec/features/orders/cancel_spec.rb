@@ -59,10 +59,9 @@ RSpec.describe 'As a registered user' do
 
           click_button 'Check Out'
 
-          visit item_path(@ogre)
-          expect(page).to have_content("Inventory: 8")
-          visit item_path(@hippo)
-          expect(page).to have_content("Inventory: 6")
+          @ogre.update(inventory: 8)
+          @hippo.update(inventory: 6)
+
 
           @order_1.update(status: 0)
           visit profile_order_path(@order_1)

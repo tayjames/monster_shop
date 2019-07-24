@@ -23,4 +23,8 @@ class Order < ApplicationRecord
   def my_items(merchant)
     items.where("items.merchant_id = #{merchant.id}").distinct
   end
+
+  def find_order_item(item, order)
+    order_items.where(order_id: order.id, item_id: item.id).first
+  end
 end
