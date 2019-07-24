@@ -7,6 +7,9 @@
   <p>User Name: <%= link_to order.user.name, admin_path(order.user_id) %></p>
   <p>Order Date: <%= order.created_at %></p>
   <p>Order Status: <%= order.status %></p>
+  <% if order.packaged? %>
+    <%= button_to 'Ship Order', admin_order_ship_path(order), method: :patch %>
+  <% end %>
   </section>
 <% end %>
 </section>

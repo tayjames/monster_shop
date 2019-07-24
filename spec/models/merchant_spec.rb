@@ -60,7 +60,7 @@ RSpec.describe Merchant do
     end
 
     it '.all_orders' do
-      expect(@megan.all_orders).to eq([@order_1.id, @order_2.id])
+      expect(@megan.all_orders).to eq([@order_1.id, @order_2.id]).or([@order_2.id, @order_1.id])
     end
   end
 end
