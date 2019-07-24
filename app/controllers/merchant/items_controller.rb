@@ -14,11 +14,10 @@ class Merchant::ItemsController < ApplicationController
   end
 
   def update
-    binding.pry
     @merchant = current_user.merchant
     @item = Item.find(params[:id])
     @item.update(item_params)
-    redirect_to merchant_items_update_path
+    redirect_to merchant_items_index_path
     flash[:success] = "#{@item.name} has been updated!"
   end
 
