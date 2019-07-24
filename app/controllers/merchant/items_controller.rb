@@ -23,14 +23,8 @@ class Merchant::ItemsController < ApplicationController
 
   def destroy
     item = Item.find(params[:id])
-    # binding.pry
-    if item.orders.empty?
-      item.destroy
-      # binding.pry
-      flash[:notice] = "#{item.name} has been deleted!"
-    else
-      flash[:notice] = "#{item.name} can not be deleted - it has been ordered!"
-    end
+    item.destroy
+    flash[:notice] = "#{item.name} has been deleted!"
     redirect_to merchant_items_index_path
   end
 

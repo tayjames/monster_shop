@@ -52,7 +52,5 @@ class MerchantsController < ApplicationController
     params.permit(:name, :address, :city, :state, :zip)
   end
 
-  def require_merchant
-    render file: "/public/404" unless current_merchant_user?
-  end
+  
 end
