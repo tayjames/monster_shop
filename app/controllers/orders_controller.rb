@@ -15,8 +15,12 @@ class OrdersController < ApplicationController
       flash[:error] = "You must #{link} to finish checkout"
       redirect_to cart_path
     end
+<<<<<<< HEAD
      order = Order.new(user_id: current_user.id, name: current_user[:name], address: current_user[:address], city: current_user[:city], state: current_user[:state], zip: current_user[:zip])
     # order = current_user.orders.new
+=======
+    order = current_user.orders.new
+>>>>>>> master
     if order.save
       cart.items.each do |item|
         order.order_items.create({
@@ -50,8 +54,4 @@ class OrdersController < ApplicationController
   def get_order
     @order = Order.find(params[:id])
   end
-  #
-  # def order_params
-  #   params.require(:user).permit(:name, :address, :city, :state, :zip)
-  # end
 end

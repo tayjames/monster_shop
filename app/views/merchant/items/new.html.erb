@@ -1,5 +1,5 @@
-<h2>Edit Item</h2>
-<%= form_tag "/merchants/#{@merchant.id}/items" do %>
+<h2>New Item</h2>
+<%= form_tag merchant_items_index_path do %>
   <%= label_tag :name %>
   <%= text_field_tag :name, params[:name]%>
 

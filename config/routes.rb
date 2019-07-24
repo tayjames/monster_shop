@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :merchants do
-    resources :items, only: [:new, :index, :create]
+    resources :items, only: :index
   end
 
   resources :items, only: [:index, :show, :edit, :update, :destroy] do
@@ -38,17 +38,20 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create', as: 'user_login'
   get '/logout', to: 'sessions#destroy'
 
-
-
   namespace :merchant do
     get '/dashboard', to: 'dashboard#index', as: 'dashboard'
     get '/', to: 'dashboard#show', as: 'dashboard_show'
+    get '/:id/items', to: 'items#index'
+    patch 'items/:id/activate', to: 'items#activate', as: 'activate'
+    patch 'items/:id/deactivate', to: 'items#deactivate', as: 'deactivate'
     get '/orders/:order_id', to: 'orders#show', as: 'orders_show'
     get '/items', to: 'items#index', as: 'items_index'
+    get '/items/new', to: 'items#new'
+    post '/items', to: 'items#create'
+    delete 'items/:id', to: 'items#destroy', as: 'item_delete'
   end
 
   namespace :admin do
-    # get '/users', to: "dashboard#all", as: 'all_users'
     get '/users', to: "users#index", as: 'all_users'
     get '/users/:id', to: "users#show"
     get '/dashboard', to: 'dashboard#index', as: :dashboard

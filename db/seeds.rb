@@ -17,4 +17,4 @@ brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image
 @tay = megan.users.create!(email: "merchant@gmail.com", password: "password", name: "Tay", role: 2, address: "123 Main St.", city: "Denver", state: "Colorado", zip: 80220)
 @ty = User.create!(email: "admin@gmail.com", password: "password", name: "Ty", role: 3, address: "123 Main St.", city: "Denver", state: "Colorado", zip: 80220)
 @tye = User.create!(email: "user@gmail.com", password: "password", name: "Ty", role: 1, address: "123 Main St.", city: "Denver", state: "Colorado", zip: 80220)
-@tye.orders.create!(name: "PapRica Jones", address: "456 Main St.", city: "Denver", state: "CO", zip: 80220)
+@tye.orders.create!

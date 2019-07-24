@@ -27,7 +27,7 @@ RSpec.describe 'User Profile Show' do
         it "I see a link on my profile page called 'My Orders'" do
           expect(page).to_not have_link('My Orders')
 
-          @user_1.orders.create!(name: "PapRica Jones", address: "456 Main St.", city: "Denver", state: "CO", zip: 80220)
+          @user_1.orders.create
 
           visit profile_path
 

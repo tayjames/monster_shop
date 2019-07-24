@@ -4,7 +4,7 @@ class Merchant::DashboardController < ApplicationController
   def index
     @pending_orders = @merchant.all_orders.map do |order|
       Order.find(order)
-    end
+    end.find_all { |order| order.pending? }
   end
 
   def show

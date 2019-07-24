@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20190719223922) do
     t.string "description"
     t.float "price"
     t.integer "inventory"
-    t.string "image"
+    t.string "image", default: "https://i.ya-webdesign.com/images/giants-drawing-ogre-12.png"
     t.boolean "active", default: true
     t.bigint "merchant_id"
     t.datetime "created_at", null: false
@@ -52,11 +52,6 @@ ActiveRecord::Schema.define(version: 20190719223922) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string "name"
-    t.string "address"
-    t.string "city"
-    t.string "state"
-    t.integer "zip"
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
