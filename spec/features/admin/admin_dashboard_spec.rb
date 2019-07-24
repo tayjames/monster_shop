@@ -15,6 +15,7 @@ RSpec.describe 'admin dashboard index' do
       @order_1 = @user.orders.create!(status: 1)
       @order_2 = @user.orders.create!(status: 2)
       @order_3 = @user.orders.create!(status: 3)
+      @order_4 = @user.orders.create!
       @order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2)
       @order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 4)
       @order_1.order_items.create!(item: @hippo, price: @hippo.price, quantity: 3)
@@ -28,22 +29,20 @@ RSpec.describe 'admin dashboard index' do
       it "I see all orders in system, sorted by status" do
         visit admin_dashboard_path
 
-        within "#order-#{@order_1.id}" do
-          expect(page).to have_content(@user.name)
-          expect(page).to have_content(@order_1.id)
-          expect(page).to have_content(@order_1.created_at)
-          click_link "#{@user.name}"
-          expect(current_path).to eq(admin_path(@user))
+        within ".sorted_orders" do
+          within "#order-#{@order_1.id}" do
+            expect(page).to have_content(@user.name)
+            expect(page).to have_content(@order_1.id)
+            expect(page).to have_content(@order_1.created_at)
+            # save_and_open_page
+            expect(page.all('id')[0]).to have_content(@order_1)
+            expect(page.all('id')[1]).to have_content(@order_0)
+            expect(page.all('id')[2]).to have_content(@order_2)
+            expect(page.all('id')[3]).to have_content(@order_3)
+            click_link "#{@user.name}"
+            expect(current_path).to eq(admin_path(@user))
+          end
         end
-        # save_and_open_page
-        # within ".sorted_orders" do
-        #   expect(page.all('li')[0]).to have_content(@order_1)
-        #   expect(page.all('li')[1]).to have_content(@order_0)
-        #   expect(page.all('li')[2]).to have_content(@order_2)
-        #   expect(page.all('li')[3]).to have_content(@order_3)
-        # end
-
-
       end
     end
   end

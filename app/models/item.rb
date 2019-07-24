@@ -28,4 +28,10 @@ class Item < ApplicationRecord
   def self.bottom_five
     joins(:order_items).select('items.*, sum(order_items.quantity) as total_quantity').group(:id).order('total_quantity').limit(5)
   end
+
+  def enough?(order_item)
+    # binding.pry
+    order_item.quantity <= self.inventory
+  end
+
 end

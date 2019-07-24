@@ -1,9 +1,12 @@
 <h1>All Orders</h1>
 
+<section class="sorted_orders">
 <% @orders.each do |order| %>
   <section id="order-<%= order.id %>">
   <p>Order Number: <%= order.id %></p>
   <p>User Name: <%= link_to order.user.name, admin_path(order.user_id) %></p>
   <p>Order Date: <%= order.created_at %></p>
+  <p>Order Status: <%= order.status %></p>
   </section>
 <% end %>
+</section>
