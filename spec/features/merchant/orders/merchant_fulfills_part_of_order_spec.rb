@@ -23,7 +23,7 @@ RSpec.describe 'Merchant fulfills' do
         within "#item-#{@hippo.id}" do
           expect(page).to have_button("Fulfill")
           expect(page).to have_content("Status: #{@order_item_1.status}")
-          expect(page).to_not have_content("Not enough inventory for this order!")
+          expect(page).to_not have_content("You do not have enough inventory to fulfill this order.")
 
           click_button "Fulfill"
         end
@@ -32,13 +32,11 @@ RSpec.describe 'Merchant fulfills' do
 
         expect(page).to have_content("Order for #{@hippo.name} has been fulfilled.")
 
-
         expect(@hippo.reload.inventory).to eq(6)
 
         within "#item-#{@hippo.id}" do
           expect(page).to have_content("fulfilled")
         end
-
       end
 
       it "it can't fulfill a part of an order if quanity is larger than inventory" do
@@ -47,12 +45,9 @@ RSpec.describe 'Merchant fulfills' do
         within "#item-#{@ogre.id}" do
           expect(page).to_not have_button("Fulfill")
           expect(page).to have_content("Status: #{@order_item_2.status}")
+          expect(page).to have_content("You do not have enough inventory to fulfill this order.")
         end
-
       end
-
     end
-
   end
-
 end
