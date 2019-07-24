@@ -11,7 +11,15 @@ class Merchant::ItemsController < ApplicationController
   def edit
     @merchant = current_user.merchant
     @item = Item.find(params[:id])
-    # binding.pry
+  end
+
+  def update
+    binding.pry
+    @merchant = current_user.merchant
+    @item = Item.find(params[:id])
+    @item.update(item_params)
+    redirect_to merchant_items_update_path
+    flash[:success] = "#{@item.name} has been updated!"
   end
 
   def create
