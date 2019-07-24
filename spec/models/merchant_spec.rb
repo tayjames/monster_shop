@@ -47,7 +47,11 @@ RSpec.describe Merchant do
     end
 
     it '.distinct_cities' do
+<<<<<<< HEAD
+      expect(@megan.distinct_cities).to eq(['Denver, CO', 'Denver, IA'])
+=======
       expect(@megan.distinct_cities).to eq(['Denver, CO', 'LA, CA'])
+>>>>>>> master
     end
 
     it '.item_quantity(order)' do

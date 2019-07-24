@@ -17,6 +17,9 @@
      <% end %>
      <%= link_to 'Merchants', '/merchants' %>
      <%= link_to 'Items', '/items' %>
+     <% if current_merchant_admin? %>
+      <%= link_to 'Merchants Items', "/merchants/#{current_user.merchant_id}/items" %>
+     <% end %>
      <% if !current_user.nil? %>
          <%= link_to 'Profile', profile_path %>
        <%= link_to 'Logout', logout_path %>
