@@ -37,8 +37,6 @@ describe "Merchant deletes an item" do
       end
 
       expect(page).to have_content("Ogre has been deleted!")
-
-      # expect(page).to_not have_content("I'm an Ogre!")
     end
   end
 end

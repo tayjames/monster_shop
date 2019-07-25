@@ -48,7 +48,7 @@ RSpec.describe "Merchant Item Edit Page" do
 
       click_button "Update"
 
-      expect(page).to have_content("Name can't be blank and Description can't be blank")
+      expect(page).to have_content("Name can't be blank, Description can't be blank, Price must be greater than 0, and Inventory must be greater than or equal to 0")
       expect(page).to_not have_content("#{@giant.name} has been updated!")
     end
   end

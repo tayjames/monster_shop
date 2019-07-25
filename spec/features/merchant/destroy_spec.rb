@@ -10,10 +10,7 @@ RSpec.describe 'Destroy Existing Merchant' do
       @user_1 = User.create!(email: "123@gmail.com", password: "password", name: "Do do Mace", address: "456 Main St.", city: "Denver", state: "CO", zip: 80220, role: 1)
       @order = @user_1.orders.create
       @order.order_items.create(item: @ogre, quantity: 3, price: @ogre.price)
-
     end
-
-  
 
     it 'When a merchant is destroyed, their items are also destroyed' do
       page.driver.submit :delete, merchant_path(@brian), {}

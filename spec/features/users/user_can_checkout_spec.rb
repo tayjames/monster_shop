@@ -9,7 +9,6 @@ RSpec.describe 'User checkout' do
       @giant = @megan.items.create!(name: 'Giant', description: "I'm a Giant!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 6 )
       @hippo = @brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 6 )
       @user = User.create!(email: "email@email.com", password: "password", name: "Mellie", address: "Streeterville", city: "Riot", state: "WA", zip: 98765)
-
     end
 
     describe 'when I add items to my cart' do
@@ -32,7 +31,6 @@ RSpec.describe 'User checkout' do
             expect(order.user_id).to eq(@user.id)
             expect(current_path).to eq(profile_orders_path)
             expect(page).to have_content("Your order has been created!")
-
 
             expect(page).to have_content("Cart: 0")
           end

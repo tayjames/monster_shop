@@ -39,7 +39,4 @@ class CartController < ApplicationController
     session[:cart] = cart.contents
     redirect_to '/cart'
   end
-
-
-
 end

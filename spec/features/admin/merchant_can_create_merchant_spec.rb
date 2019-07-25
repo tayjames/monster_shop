@@ -1,15 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'New Merchant Creation' do
-  describe 'As a Visitor' do
-    it 'I can link to a new merchant page from merchant index' do
-      visit '/merchants'
-
-      click_link 'New Merchant'
-
-      expect(current_path).to eq('/merchants/new')
-    end
-
+  describe 'As a Admin' do
     it 'I can use the new merchant form to create a new merchant' do
       visit '/merchants/new'
 

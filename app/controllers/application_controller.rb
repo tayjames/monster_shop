@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
 
   helper_method :cart, :current_user, :current_registered_user?, :current_admin?, :current_merchant_user?, :current_merchant_admin?
 
-
   def cart
     @cart ||= Cart.new(session[:cart])
   end
@@ -17,7 +16,6 @@ class ApplicationController < ActionController::Base
       flash[validation] = "#{validation.capitalize}: #{message.join}"
     end
   end
-
 
   def current_registered_user?
     current_user && current_user.registered_user?
@@ -33,6 +31,5 @@ class ApplicationController < ActionController::Base
 
   def current_admin?
     current_user && current_user.admin?
-
   end
 end

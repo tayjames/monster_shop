@@ -34,7 +34,7 @@ RSpec.describe 'As a registered user' do
         expect(page).to have_content("Date Updated: #{@order_1.updated_at.strftime("%m/%d/%Y")}")
         expect(page).to have_content("Status: #{@order_1.status}")
         expect(page).to have_content("Total Quantity of Items: #{@order_1.total_quantity}")
-        expect(page).to have_content("Grand Total: #{@order_1.grand_total}")
+        expect(page).to have_content("Grand Total: #{number_to_currency(@order_1.grand_total)}")
       end
 
       within "#order-#{@order_2.id}" do
@@ -44,7 +44,7 @@ RSpec.describe 'As a registered user' do
         expect(page).to have_content("Date Updated: #{@order_2.updated_at.strftime("%m/%d/%Y")}")
         expect(page).to have_content("Status: #{@order_2.status}")
         expect(page).to have_content("Total Quantity of Items: #{@order_2.total_quantity}")
-        expect(page).to have_content("Grand Total: #{@order_2.grand_total}")
+        expect(page).to have_content("Grand Total: #{number_to_currency(@order_2.grand_total)}")
       end
     end
   end

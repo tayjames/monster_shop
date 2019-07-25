@@ -9,6 +9,9 @@ class Item < ApplicationRecord
                         :price,
                         :inventory
 
+  validates :price, numericality: { greater_than: 0 }
+  validates :inventory, numericality: { greater_than_or_equal_to: 0 }
+
   def sorted_reviews(limit = nil, order = :asc)
     reviews.order(rating: order).limit(limit)
   end
@@ -30,7 +33,6 @@ class Item < ApplicationRecord
   end
 
   def enough?(order_item)
-    # binding.pry
     order_item.quantity <= self.inventory
   end
 

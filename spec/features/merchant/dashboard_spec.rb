@@ -31,11 +31,11 @@ RSpec.describe "Merchant Dashboard/Profile Show Page" do
     it "I see my profile details, but cannot edit them" do
       visit merchant_dashboard_show_path
 
-      expect(page).to have_content("Name: #{@megan.name}")
-      expect(page).to have_content("Street Address: #{@megan.address}")
-      expect(page).to have_content("City: #{@megan.city}")
-      expect(page).to have_content("State: #{@megan.state}")
-      expect(page).to have_content("Zip: #{@megan.zip}")
+      expect(page).to have_content("#{@megan.name}")
+      expect(page).to have_content("#{@megan.address}")
+      expect(page).to have_content("#{@megan.city}")
+      expect(page).to have_content("#{@megan.state}")
+      expect(page).to have_content("#{@megan.zip}")
 
       expect(page).to_not have_link("Edit Profile")
       expect(page).to_not have_button("Edit Profile")

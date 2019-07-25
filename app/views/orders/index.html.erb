@@ -7,7 +7,6 @@
     <p>Date Updated: <%= order.updated_at.strftime("%m/%d/%Y") %></p>
     <p>Status: <%= order.status %></p>
     <p>Total Quantity of Items: <%= order.total_quantity %></p>
-    <p>Grand Total: <%= order.grand_total %></p>
+    <p>Grand Total: <%= number_to_currency(order.grand_total) %></p>
   </section>
 <% end %>
-

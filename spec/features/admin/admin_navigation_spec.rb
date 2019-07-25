@@ -13,7 +13,6 @@ describe "User visits categories index page" do
 
       click_button 'Login'
 
-      expect(page).to have_content("Profile")
       expect(page).to have_content("Logout")
       expect(page).to have_content("Admin Dashboard")
       expect(page).to have_content("All Users")
