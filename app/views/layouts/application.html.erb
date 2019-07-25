@@ -1,64 +1,98 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>MonsterShop</title>
+    <title>LittleShop</title>
     <%= csrf_meta_tags %>
-
+    <%= stylesheet_link_tag "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"%>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+
+    <style>
+      body {
+        background-color: #868a8f;
+        text-align: center;
+        margin-top: 150px;
+      }
+
+      section {
+        text-align: center;
+      }
+
+    </style>
   </head>
 
   <body>
-    <nav>
-      <%= link_to 'Home', root_path %>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position:fixed;top:0;width:100%;">
+      <a class="navbar-brand" href="#">Little Shop</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link"<%= link_to 'Home', root_path %></a>
 
-      <% if current_user.nil? %>
-        <%= link_to 'Register', register_path %>
-        <%= link_to 'Login', login_path %>
-      <% end %>
+          <% if current_user.nil? %>
+            <a class="nav-item nav-link"<%= link_to 'Register', register_path %></a>
+            <a class="nav-item nav-link"<%= link_to 'Login', login_path %></a>
+          <% end %>
 
-      <% if !current_admin? %>
-        <%= link_to 'Merchants', '/merchants' %>
-      <% end %>
+          <% if !current_admin? %>
+            <a class="nav-item nav-link"<%= link_to 'Merchants', '/merchants' %></a>
+          <% end %>
 
-      <%= link_to 'Items', '/items' %>
+          <a class="nav-item nav-link"<%= link_to 'Items', '/items' %></a>
 
-      <% if current_admin? %>
-        <%= link_to 'Merchants', admin_merchants_path %>
-      <% end %>
+          <% if current_admin? %>
+            <a class="nav-item nav-link"<%= link_to 'Merchants', admin_merchants_path %></a>
+          <% end %>
 
-      <% if current_registered_user? %>
-        <%= link_to 'Profile', profile_path %>
-      <% end %>
-
-
-      <% if current_merchant_admin? || current_merchant_user? %>
-        <%= link_to 'Merchant Dashboard', merchant_dashboard_path %>
-      <% end %>
-
-      <% if !current_user.nil? && current_admin?  %>
-        <%= link_to "Admin Dashboard", admin_dashboard_path %>
-        <%= link_to "All Users", admin_all_users_path %>
-      <% end %>
-      
-      <% if current_merchant_admin? %>
-      <%= link_to 'My Items', merchant_items_index_path %>
-      <% end %>
-
-      <% if !current_user.nil? %>
-        <%= link_to 'Logout', logout_path %>
-      <% end %>
-
-      <% unless current_merchant_admin? || current_admin? %>
-        <%= link_to "Cart: #{cart.count}", cart_path %>
-      <% end %>
+          <% if current_registered_user? %>
+            <a class="nav-item nav-link"<%= link_to 'Profile', profile_path %></a>
+          <% end %>
 
 
+          <% if current_merchant_admin? || current_merchant_user? %>
+            <a class="nav-item nav-link"<%= link_to 'Merchant Dashboard', merchant_dashboard_path %></a>
+          <% end %>
 
-   </nav>
-    <% flash.each do |type, message| %>
-    <p><%= message %></p>
-    <% end %>
-    <%= yield %>
-  </body>
+          <% if !current_user.nil? && current_admin?  %>
+            <a class="nav-item nav-link"<%= link_to "Admin Dashboard", admin_dashboard_path %></a>
+            <a class="nav-item nav-link"<%= link_to "All Users", admin_all_users_path %></a>
+          <% end %>
+
+          <% if current_merchant_admin? %>
+          <a class="nav-item nav-link"<%= link_to 'My Items', merchant_items_index_path %></a>
+          <% end %>
+
+          <% if !current_user.nil? %>
+            <a class="nav-item nav-link"<%= link_to 'Logout', logout_path %></a>
+          <% end %>
+
+          <% unless current_merchant_admin? || current_admin? %>
+            <a class="nav-item nav-link"<%= link_to "Cart: #{cart.count}", cart_path %></a>
+          <% end %>
+        </div>
+    </div>
+  </nav>
+
+  <% if flash[:notice] %>
+    <div class="alert alert-success">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+       <%= flash[:notice] %>
+    </div>
+    <% elsif flash[:error] %>
+    <div class="alert alert-warning">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+       <%= flash[:error] %>
+    </div>
+    <% elsif flash[:alert] %>
+    <div class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+       <%= flash[:alert] %>
+    </div>
+  <% end %>
+
+
+  <%= yield %>
+</body>
 </html>

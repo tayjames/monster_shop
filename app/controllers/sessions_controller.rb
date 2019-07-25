@@ -3,16 +3,16 @@ class SessionsController < ApplicationController
     if current_user
       if current_merchant_admin?
         redirect_to (merchant_dashboard_path)
-        flash[:success] = "You are already logged in"
+        flash[:notice] = "You are already logged in"
       elsif current_merchant_user?
         redirect_to (merchant_dashboard_path)
-        flash[:success] = "You are already logged in"
+        flash[:notice] = "You are already logged in"
       elsif current_registered_user?
         redirect_to (profile_path)
-        flash[:success] = "You are already logged in"
+        flash[:notice] = "You are already logged in"
       else current_admin?
         redirect_to (admin_dashboard_path)
-        flash[:success] = "You are already logged in"
+        flash[:notice] = "You are already logged in"
       end
     end
   end
@@ -28,9 +28,9 @@ class SessionsController < ApplicationController
       elsif current_admin?
         redirect_to admin_dashboard_path
       end
-      flash[:message] = "You are now Logged in #{user.name}"
+      flash[:notice] = "You are now Logged in #{user.name}"
     else
-      flash[:notice] = "Email/Password incorrect."
+      flash[:alert] = "Email/Password incorrect."
       render :new
     end
   end

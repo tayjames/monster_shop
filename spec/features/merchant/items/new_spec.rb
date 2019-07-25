@@ -49,9 +49,9 @@ RSpec.describe 'Merchant adds an Item' do
         fill_in 'Name', with: name
         click_button 'Create Item'
 
-        expect(page).to have_content("Description: can't be blank")
-        expect(page).to have_content("Price: can't be blank")
-        expect(page).to have_content("Inventory: can't be blank")
+        expect(page).to have_content("Description can't be blank")
+        expect(page).to have_content("Price can't be blank")
+        expect(page).to have_content("Inventory can't be blank") 
         expect(page).to have_button('Create Item')
       end
 

@@ -18,9 +18,9 @@ class Merchant::ItemsController < ApplicationController
     @item = Item.find(params[:id])
     if @item.update(item_params)
       redirect_to merchant_items_index_path
-      flash[:success] = "#{@item.name} has been updated!"
+      flash[:notice] = "#{@item.name} has been updated!"
     else
-      flash[:notice] = @item.errors.full_messages.to_sentence
+      flash[:alert] = @item.errors.full_messages.to_sentence
       render :edit
     end
   end
@@ -32,7 +32,7 @@ class Merchant::ItemsController < ApplicationController
       redirect_to merchant_items_index_path
       flash[:notice] = "#{@item.name} has been created"
     else
-      generate_flash(@item)
+      flash[:alert] = @item.errors.full_messages.to_sentence
       render :new
     end
   end
@@ -40,7 +40,7 @@ class Merchant::ItemsController < ApplicationController
   def destroy
     item = Item.find(params[:id])
     item.destroy
-    flash[:notice] = "#{item.name} has been deleted!"
+    flash[:alert] = "#{item.name} has been deleted!"
     redirect_to merchant_items_index_path
   end
 
@@ -48,14 +48,14 @@ class Merchant::ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @item.update(active: true)
     redirect_to "/merchant/#{current_user.merchant_id}/items"
-    flash[:activate] = "#{@item.name} is for sale"
+    flash[:notice] = "#{@item.name} is for sale"
   end
 
   def deactivate
     @item = Item.find(params[:id])
     @item.update(active: false)
     redirect_to "/merchant/#{current_user.merchant_id}/items"
-    flash[:deactivate] = "#{@item.name} is no longer for sale"
+    flash[:alert] = "#{@item.name} is no longer for sale"
   end
 
   private
