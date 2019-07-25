@@ -6,8 +6,6 @@ RSpec.describe 'Existing Merchant Update' do
       @megan = Merchant.create!(name: 'Megans Marmalades', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
     end
 
-    
-
     it 'I can use the edit merchant form to update the merchant information' do
       visit "/merchants/#{@megan.id}/edit"
 

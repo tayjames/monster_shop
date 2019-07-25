@@ -62,7 +62,6 @@ RSpec.describe 'As a registered user' do
           @ogre.update(inventory: 8)
           @hippo.update(inventory: 6)
 
-
           @order_1.update(status: 1)
           visit profile_order_path(@order_1)
 

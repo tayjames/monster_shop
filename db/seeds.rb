@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
+Order.destroy_all
 User.destroy_all
 Merchant.destroy_all
 Item.destroy_all
@@ -15,6 +15,7 @@ megan.items.create!(name: 'Ogre', description: "I'm an Ogre!", price: 20, image:
 megan.items.create!(name: 'Giant', description: "I'm a Giant!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
 brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
 @tay = megan.users.create!(email: "merchant@gmail.com", password: "password", name: "Tay", role: 2, address: "123 Main St.", city: "Denver", state: "Colorado", zip: 80220)
+@jay = megan.users.create!(email: "merchant_employee@gmail.com", password: "password", name: "Tay", role: 1, address: "123 Main St.", city: "Denver", state: "Colorado", zip: 80220)
 @ty = User.create!(email: "admin@gmail.com", password: "password", name: "Ty", role: 3, address: "123 Main St.", city: "Denver", state: "Colorado", zip: 80220)
 @tye = User.create!(email: "user@gmail.com", password: "password", name: "Ty", role: 1, address: "123 Main St.", city: "Denver", state: "Colorado", zip: 80220)
 @tye.orders.create!

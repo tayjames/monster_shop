@@ -46,7 +46,7 @@ RSpec.describe "Admin Merchant Index Page" do
         expect(page).to_not have_button("Disable")
         click_button "Enable"
       end
-      expect(current_path).to eq(merchants_path)
+      expect(current_path).to eq(admin_merchants_path)
       expect(@megan.reload.enabled).to eq(true)
       expect(@giant.reload.active).to eq(true)
       expect(@ogre.reload.active).to eq(true)
@@ -63,14 +63,14 @@ RSpec.describe "Admin Merchant Index Page" do
 
       expect(@brian.enabled).to eq(true)
       expect(@hippo.active).to eq(true)
-      # binding.pry
+
       within "#merchant-#{@brian.id}" do
         expect(page).to have_button("Disable")
         expect(page).to_not have_button("Enable")
         click_button 'Disable'
       end
-      # binding.pry
-      expect(current_path).to eq(merchants_path)
+
+      expect(current_path).to eq(admin_merchants_path)
       expect(@brian.reload.enabled).to eq(false)
       expect(@hippo.reload.active).to eq(false)
       expect(page).to have_content("#{@brian.name} has now been disabled")

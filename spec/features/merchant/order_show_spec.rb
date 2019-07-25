@@ -24,7 +24,6 @@ RSpec.describe 'merchant order show page' do
       @order_2.order_items.create!(item: @hippo_2, price: @hippo_2.price, quantity: 11)
       @order_3.order_items.create!(item: @ogre_2, price: @ogre_2.price, quantity: 5)
       @order_3.order_items.create!(item: @giant, price: @giant.price, quantity: 8)
-
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@emily)
     end
 

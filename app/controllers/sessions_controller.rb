@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
   def new
-    # binding.pry
     if current_user
       if current_merchant_admin?
         redirect_to (merchant_dashboard_path)
@@ -22,7 +21,6 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-
       if current_merchant_user?
         redirect_to merchant_dashboard_path
       elsif current_registered_user?

@@ -1,12 +1,11 @@
 class Order < ApplicationRecord
-
   has_many :order_items
   has_many :items, through: :order_items
 
   belongs_to :user
 
   validates_presence_of :status
-  enum status: ["packaged", "pending", "shipped", "cancelled"] 
+  enum status: ["packaged", "pending", "shipped", "cancelled"]
 
   def grand_total
     order_items.sum('price * quantity')

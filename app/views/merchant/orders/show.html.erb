@@ -19,7 +19,7 @@
     <% if @order.find_order_item(item, @order).unfulfilled? %>
       <%= button_to "Fulfill", merchant_item_fulfill_path(@order.find_order_item(item, @order)), method: :patch %>
     <% end %>
-    <% else  %>
+  <% else  %>
     <p><b>You do not have enough inventory to fulfill this order.</b></p>
   <% end %>
 </section>

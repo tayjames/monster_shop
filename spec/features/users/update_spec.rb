@@ -17,11 +17,6 @@ RSpec.describe 'User Update' do
       end
 
       it "I can edit my profile" do
-
-
-
-
-
         visit profile_path
 
         click_button 'Edit Profile'
@@ -42,8 +37,6 @@ RSpec.describe 'User Update' do
         fill_in "Zip", with: 96820
         fill_in "Email", with: "fogel@aol.com"
 
-
-
         click_on 'Update Profile'
 
         expect(current_path).to eq(profile_path)
@@ -58,7 +51,6 @@ RSpec.describe 'User Update' do
       end
 
       it "I cannot leave fields blank while updating my profile" do
-
 
         click_button 'Edit Profile'
 
@@ -82,7 +74,6 @@ RSpec.describe 'User Update' do
         expect(current_path).to eq(edit_password_path(@user_1))
 
         new_password = 'hellooooo'
-
 
         fill_in :password, with: new_password
         fill_in :password_confirmation, with: new_password
