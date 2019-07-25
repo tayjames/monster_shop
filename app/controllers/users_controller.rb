@@ -8,8 +8,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      flash[:notice] = "Thanks for Registering"
-      flash[:message] = "You are now Logged in #{@user.name}"
+      flash[:notice] = "Thanks for Registering. You are now Logged in #{@user.name}"
       redirect_to profile_path
     else
       flash[:notice] = @user.errors.full_messages.to_sentence

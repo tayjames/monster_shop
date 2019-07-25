@@ -33,7 +33,7 @@ class OrdersController < ApplicationController
     @order.items.each do |item|
       item.update(inventory: item.inventory + @order.quantity_of_item(item))
     end
-    flash[:notice] = "Order ID: #{@order.id} has been cancelled."
+    flash[:alert] = "Order ID: #{@order.id} has been cancelled."
     redirect_to profile_path
   end
 
