@@ -7,20 +7,47 @@ Rails.application.routes.draw do
   resources :merchants do
     resources :items, only: :index
   end
+  # get '/merchants/:merchant_id/items', to: items#index
+  # get '/merchants', to: merchants#index
+  # post '/merchants', to: merchants#create
+  # get '/merchants/new', to: merchants#new
+  # get '/merchants/edit', to: merchants#edit
+  # get '/merchants/:id', to: merchants#show
+  # patch '/merchants/:id', to: merchants#update
+  # put '/merchants/:id', to: merchants#update
+  # delete '/merchants/:id', to: merchants#destroy
 
   resources :items, only: [:index, :show, :edit, :update, :destroy] do
     resources :reviews, only: [:new, :create]
   end
+  # post '/items/:item_id/reviews', to: reviews#create
+  # get '/items/:item_id/reviews/new', to: reviews#new
+  # get '/items', to: items#index
+  # get '/items/edit', to: items#edit
+  # get '/items/:id', to: items#show
+  # patch '/items/:id', to: items#update
+  # put '/items/:i'd', to: items#update
+  # delete '/items/:id', to: items#destroy
 
   resources :reviews, only: [:edit, :update, :destroy]
+  # get '/reviews/:id/edit', to: reviews#edit
+  # patch '/reviews/:id', to: reviews#update
+  # put '/reviews/:id', to: reviews#update
+  # delete '/reviews/:id', to: reviews#delete
 
   get '/cart', to: 'cart#show'
+  # resources :cart, only: [:show]
   post '/cart/:item_id', to: 'cart#add_item'
+  #non restful
   delete '/cart', to: 'cart#empty'
+  #non restful
   patch '/cart/:change/:item_id', to: 'cart#update_quantity'
+  #non restful
   delete '/cart/:item_id', to: 'cart#remove_item'
+  #non restful
 
   resources :users, only: [:new]
+  # get '/users/new', to: users#new
 
   get '/register', to: 'users#register'
   get '/profile', to: 'users#show', as: 'profile'
